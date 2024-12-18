@@ -23,13 +23,13 @@ protected:
 
 public:	
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
+	void IsRiding(bool Inbool);
 	void CheckInteractive();
 
 private:
 	UPROPERTY(EditAnywhere)
 	float InteractionDistance = 600.0f;
-
+	bool isRiding = false;
 private:
 	TSet<UPrimitiveComponent*> OnOutlineResult;
 		

@@ -286,6 +286,8 @@ void UCCameraManagerComponent::OnFistAttack()
 {
 	if (bIsCameraAction == true)
 		return;
+	if (StopAttackAction == true)
+		return;
 
 	GetWorld()->GetTimerManager().ClearTimer(RestoreTimeHandler);
 	bIsCameraAction = true;
@@ -296,6 +298,8 @@ void UCCameraManagerComponent::OnFistAttack()
 void UCCameraManagerComponent::OnSwordAttack()
 {
 	if (bIsCameraAction == true)
+		return;
+	if (StopAttackAction == true)
 		return;
 
 	GetWorld()->GetTimerManager().ClearTimer(RestoreTimeHandler);
@@ -366,6 +370,11 @@ void UCCameraManagerComponent::DefaultCameraChange(ECameraEnum InCameraNum)
 void UCCameraManagerComponent::SetbCameraTick(bool InBool)
 {
 	StopCameraAction = InBool;
+}
+
+void UCCameraManagerComponent::SetbCameraAttack(bool InBool)
+{
+	StopAttackAction = InBool;
 }
 
 

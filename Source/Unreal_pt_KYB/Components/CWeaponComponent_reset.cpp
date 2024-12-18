@@ -48,7 +48,7 @@ void UCWeaponComponent_reset::SetMode(EWeaponType InType)
 		return;
 	if (OwnerCharacter->GetCharacterMovement()->IsFalling())
 		return;
-	if (CurrentWeaponType == InType)
+	if (CurrentWeaponType == InType )
 	{
 		SetUnarmedMode();
 		Datas[(uint8)InType]->GetEquipment()->UnEquip();
@@ -135,7 +135,11 @@ void UCWeaponComponent_reset::SetFistMode()
 
 void UCWeaponComponent_reset::SetUnarmedMode()
 {
+	bool bSameType = false;
+	//반드시 아이들 상태에서만 무기 변경이 가능하게 확인한다.
+	IsSameStateType_Delegate.ExecuteIfBound(EStateType::Idle, bSameType);
 	ChangeType(EWeaponType::Max);
+	
 }
 
 void UCWeaponComponent_reset::SetBowMode()

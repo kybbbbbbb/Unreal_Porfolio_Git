@@ -5,6 +5,7 @@
 #include "GameFramework/Character.h"
 #include "../CAttachment.h"
 #include "../CDoAction_Bow.h"
+#include "GameManager/CUIManager_Game.h"
 
 UCSubAction_Bow_Skill_Q::UCSubAction_Bow_Skill_Q()
 {
@@ -53,6 +54,9 @@ void UCSubAction_Bow_Skill_Q::Tick(float InDeltaTime)
 void UCSubAction_Bow_Skill_Q::Pressed()
 {
 	Super::Pressed();
+	if (bCoolTimeOn == true)
+		return;
+
 	State->OnSubActionMode();
 
 	//toggle
@@ -93,6 +97,8 @@ void UCSubAction_Bow_Skill_Q::StopSubAction()
 	DecalComponent->SetVisibility(false);
 	bInAction = false;
 	State->OffSubActionMode();
+	CoolTimeOn();
+	UCUIManager_Game::GetInstance(Owner->GetWorld())->SetSkillCoolTime(CoolTime, &CoolTimehandler, KeyName);
 }
 
 
@@ -135,4 +141,16 @@ bool UCSubAction_Bow_Skill_Q::GetCursorLocationAndRotation(FVector& OutLocation,
 	//OutLocation = hitResult.Location;
 	//OutRotation = hitResult.ImpactNormal.Rotation();
 	//return true;
+}
+
+void UCSubAction_Bow_Skill_Q::CoolTimeOn()
+{
+	bCoolTimeOn = true;
+
+	Owner->GetWorld()->GetTimerManager().SetTimer(CoolTimehandler, this, &UCSubAction_Bow_Skill_Q::CoolTimeOver, CoolTime, false);
+}
+
+void UCSubAction_Bow_Skill_Q::CoolTimeOver()
+{
+	bCoolTimeOn = false;
 }

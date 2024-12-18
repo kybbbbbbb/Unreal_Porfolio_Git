@@ -7,7 +7,7 @@
 UENUM()
 enum class ESubActionEnum : uint8
 {
-	RightMouseButton = 10, Q, NoExistSkill = 9
+	NoExistSkill = 9,RightMouseButton = 10, Q,E
 };
 
 UCLASS()
@@ -32,6 +32,8 @@ public:
 	virtual void Pressed();
 	virtual void Released();
 	FORCEINLINE UTexture2D* GetSkillImage() { return SkillTexture; }
+	FORCEINLINE float GetMaxCoolTime() { return CoolTime; }
+	FORCEINLINE FTimerHandle* GetHandler() { return &CoolTimehandler; }
 
 public:
 	FORCEINLINE virtual void StopSubAction();
@@ -57,4 +59,9 @@ protected:
 public:
 	UPROPERTY(EditAnywhere)
 	class UTexture2D* SkillTexture;
+
+protected:
+	UPROPERTY(EditAnywhere)
+	float CoolTime = 0.0f;
+	FTimerHandle CoolTimehandler;
 };

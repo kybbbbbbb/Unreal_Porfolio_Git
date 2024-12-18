@@ -17,6 +17,8 @@
 #include "../GameManager/CCameraManagerComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "../Components/CFootIKComponent.h"
+#include "CHorse.h"
 
 ACPlayer::ACPlayer()
 {
@@ -31,6 +33,7 @@ ACPlayer::ACPlayer()
 	HealthComponent = CreateDefaultSubobject<UCHealthComponent>("HealthComponent");
 
 	Inventory2 = CreateDefaultSubobject<UInventorySystem>("InventorySystem");
+	FootIKComponent = CreateDefaultSubobject<UCFootIKComponent>("FootIKComponent");
 
 	CameraManagerComponent = CreateDefaultSubobject<UCCameraManagerComponent>("CameraManagerComponent");
 
@@ -65,6 +68,11 @@ void ACPlayer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
+	if (UIManager != nullptr)
+	{
+		UIManager->Tick(DeltaTime);
+	}
+
 	if (bOnDash == true)
 	{
 		if (GetCharacterMovement()->IsFalling() == false)
@@ -79,6 +87,7 @@ void ACPlayer::Tick(float DeltaTime)
 		}
 
 	}
+
 }
 
 bool ACPlayer::RequestAttackToken()
@@ -108,7 +117,7 @@ void ACPlayer::BeginPlay()
 
 	MovementComponent->OnRun();
 	MovementComponent->DisableControlRotation();
-	UCUIManager_Game::GetInstance(GetWorld());
+	UIManager = UCUIManager_Game::GetInstance(GetWorld());
 	UCSoundManager* soundManager = UCSoundManager::GetInstance();
 	SoundManager = soundManager;
 	//SoundManager->PlayBGM("BGM_Full", GetWorld());
@@ -276,6 +285,52 @@ void ACPlayer::Dead()
 
 }
 
+void ACPlayer::SpawnHorse()
+{
+	if (OwnHorse == nullptr)
+	{
+		// 스폰할 말의 클래스가 설정되어 있는지 확인
+		if (HorseClass)
+		{
+			// 월드 컨텍스트 가져오기
+			UWorld* World = GetWorld();
+			if (World)
+			{
+				// 플레이어 위치 근처에 말 스폰
+				FVector ForwardVector = GetActorForwardVector(); // 캐릭터 전방 벡터
+				FVector rightVector = GetActorRightVector();
+				FVector SpawnLocation = GetActorLocation() - (ForwardVector * 500.0f) + FVector(0.0f, 0.0f, 50.0f) + rightVector*150; // 캐릭터 뒤쪽으로 스폰
+				FRotator SpawnRotation = GetActorRotation();
+
+				FHitResult HitResult;
+				FVector TraceStart = SpawnLocation + FVector(0.0f, 0.0f, 500.0f); // 위에서 시작
+				FVector TraceEnd = SpawnLocation - FVector(0.0f, 0.0f, 500.0f);   // 아래로 끝
+
+				FCollisionQueryParams QueryParams;
+				QueryParams.AddIgnoredActor(this); 
+
+				if (World->LineTraceSingleByChannel(HitResult, TraceStart, TraceEnd, ECC_Visibility, QueryParams))
+				{
+					SpawnLocation = HitResult.ImpactPoint + FVector(0.0f, 0.0f, 50.0f); // 약간 위로 올려 스폰
+				}
+
+				FActorSpawnParameters SpawnParams;
+				SpawnParams.Owner = this;
+				SpawnParams.Instigator = GetInstigator();
+
+				OwnHorse = World->SpawnActor<ACHorse>(HorseClass, SpawnLocation, SpawnRotation, SpawnParams);
+			}
+		}
+	}
+	else
+	{
+		OwnHorse->Destroy();
+		OwnHorse = nullptr;
+
+	}
+
+}
+
 void ACPlayer::End_Damaged()
 {
 	StateComponent->SetIdleMode();
@@ -336,10 +391,14 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAction("SubAction_Q", EInputEvent::IE_Pressed, this, &ACPlayer::SubActionQ_Pressed);
 	PlayerInputComponent->BindAction("SubAction_Q", EInputEvent::IE_Released, this, &ACPlayer::SubActionQ_Released);
 	
+	PlayerInputComponent->BindAction("SubAction_E", EInputEvent::IE_Pressed, this, &ACPlayer::SubActionE_Pressed);
+	PlayerInputComponent->BindAction("SubAction_E", EInputEvent::IE_Released, this, &ACPlayer::SubActionE_Released);
+
 	PlayerInputComponent->BindAction("SubAction_MR", EInputEvent::IE_Pressed, this, &ACPlayer::SubActionMR_Pressed);
 	PlayerInputComponent->BindAction("SubAction_MR", EInputEvent::IE_Released, this, &ACPlayer::SubActionMR_Released);
 
 	PlayerInputComponent->BindAction("Inventory", EInputEvent::IE_Pressed, this, &ACPlayer::OnInventory);
+	PlayerInputComponent->BindAction("Horse", EInputEvent::IE_Pressed, this, &ACPlayer::SpawnHorse);
 }
 
 
@@ -502,9 +561,42 @@ void ACPlayer::SubActionMR_Released()
 	}
 }
 
+void ACPlayer::SubActionE_Pressed()
+{
+	if (StateComponent->IsDeadMode())
+		return;
+	if (StateComponent->IsEquipMode())
+		return;
+	if (StateComponent->IsEvadeMode())
+		return;
+
+	TArray<UCSubAction_RightMouse*>* subActions = WeaponComponent->GetSubAction();
+	if (subActions == nullptr)
+		return;
+	if (subActions->Num() < 1)
+		return;
+
+	for (UCSubAction_RightMouse* subAction : *subActions)
+	{
+		if (subAction->GetInSubAction_KeyNumber() == EKeys::E)
+			continue;
+
+		if (subAction->GetInSubAction_RightMouse() == true)
+			return;
+	}
+
+
+	WeaponComponent->SubAction_Pressed(EKeys::E);
+}
+
+void ACPlayer::SubActionE_Released()
+{
+}
+
 void ACPlayer::OnInventory()
 {
-	UCUIManager_Game* UIManager = UCUIManager_Game::GetInstance(GetWorld());
+	if(UIManager == nullptr)
+		UIManager = UCUIManager_Game::GetInstance(GetWorld());
 
 	UIManager->ShowItemUI();
 }
@@ -786,6 +878,36 @@ void ACPlayer::Landed(const FHitResult& Hit)
 	SetActorRotation(CurrentRotation);
 	GetCapsuleComponent()->SetCollisionProfileName(TEXT("Pawn"));
 
+}
+
+void ACPlayer::OnRiding(ACHorse* Inhorse)
+{
+	IsRiding = true;
+	EWeaponType type = WeaponComponent->GetType();
+	if(type != EWeaponType::Max)
+		WeaponComponent->SetMode(type);
+
+	currenthorse = Inhorse;
+	FootIKComponent->IsRiding(IsRiding);
+	MovementComponent->Stop();
+	MovementComponent->SetFixedCamera(false);
+	CameraManagerComponent->SetbCameraTick(false);
+	UCAnimInstance* anim = Cast<UCAnimInstance>(GetMesh()->GetAnimInstance());
+	anim->IsRiding(IsRiding);
+}
+
+void ACPlayer::OffRiding()
+{
+	IsRiding = false;
+	currenthorse = nullptr;
+	FootIKComponent->IsRiding(IsRiding);
+	MovementComponent->Move();
+	CameraManagerComponent->SetbCameraTick(true);
+
+	MovementComponent->SetFixedCamera(false);
+	
+	UCAnimInstance* anim = Cast<UCAnimInstance>(GetMesh()->GetAnimInstance());
+	anim->IsRiding(IsRiding);
 }
 
 

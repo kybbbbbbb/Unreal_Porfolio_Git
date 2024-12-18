@@ -38,9 +38,21 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Animation")
 	bool IsDamage = false;
 
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "IK")
+	float LFootIKlocation;
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "IK")
+	float RFootIKlocation;
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "IK")
+	float pelvisOffset;
+
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "IK")
+	FRotator LFRotation;
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "IK")
+	FRotator RFRotation;
+
 	//È° °ü·Ã
 protected:
-	UPROPERTY(BlueprintReadOnly, Category = "Animation")
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Animation")
 	bool bBow_Aiming;
 
 
@@ -53,9 +65,34 @@ public:
 	void NativeBeginPlay() override;
 	void NativeUpdateAnimation(float DeltaSeconds) override;
 	void ChangedAiming(bool bInbool);
+	void IsRiding(bool Inbool);
+	void SetRiderVertical(float infloat);
+	void SetRiderHorizontal(float infloat);
+
 	//void OnJump();
 	//void OffJump();
+	FORCEINLINE void SetLFootIK(float LFLocation, float RFLocation, float pelvis, FRotator LFootRotation, FRotator RFootRotation)
+	{
+		LFootIKlocation = LFLocation;
+		RFootIKlocation = RFLocation;
+		pelvisOffset = pelvis;
+		LFRotation = LFootRotation;
+		RFRotation = RFootRotation;
+	}
+	FORCEINLINE bool GetIsJump() { return IsJump; }
+	FORCEINLINE void SetHorseJump(bool Inbool) { HorseJump = Inbool; }
 	
 private:
 	FRotator PrevRotation;
+
+protected:
+	UPROPERTY(BlueprintReadOnly)
+	bool isRiding = false;
+	UPROPERTY(BlueprintReadOnly)
+	float Vertical = 0.0f;
+	UPROPERTY(BlueprintReadOnly)
+	float Horizontal = 0.0f;
+	UPROPERTY(BlueprintReadOnly)
+	bool HorseJump = false;
+
 };

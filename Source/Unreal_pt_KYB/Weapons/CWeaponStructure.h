@@ -65,7 +65,7 @@ public:
 
 
 public:
-	void DoAction(class ACharacter* InOwner);
+	void DoAction(class ACharacter* InOwner, FName sectionName = "");
 	void SpawnAttackableSkillTimer(FVector Location, ACharacter* InOwner);
 };
 

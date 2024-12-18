@@ -7,6 +7,7 @@
 #include "Components/Image.h"
 #include "../Item/CItemDataAsset.h"
 #include "../Components/CWeaponComponent_reset.h"
+#include "Components/TextBlock.h"
 #include "CUIManager_Game.generated.h"
 
 /*------------------------------------------------------------------------
@@ -26,6 +27,7 @@ public:
 	UCUIManager_Game();
 
 	void Initialize(UWorld* World);
+	void Tick(float InDeltaTime);
 
 	void ShowPlayerUI();
 	void HidePlayerUI();
@@ -50,6 +52,8 @@ public:
 
 	UFUNCTION()
 	void MonsterDeadDelegate();
+
+	void SetSkillCoolTime(float InMaxCool, FTimerHandle* InHandle, FKey InKey);
 
 	static UCUIManager_Game* GetInstance(UWorld* Inworld);
 
@@ -111,6 +115,23 @@ private:
 
 	bool bOnitemInventory = false;
 	bool bUnarmd = true;
+
+	float SkillQ_MaxCoolTime = 0.0f;
+	FTimerHandle* SkillQ_Handler = nullptr;
+	UMaterialInstanceDynamic* SkillQ;
+	UTextBlock* CoolTimeText_Q = nullptr;
+	
+
+	float SkillE_MaxCoolTime = 0.0f;
+	FTimerHandle* SkillE_Handler = nullptr;
+	UMaterialInstanceDynamic* SkillE;
+	UTextBlock* CoolTimeText_E = nullptr;
+
+	float SkillF_MaxCoolTime = 0.0f;
+	FTimerHandle* SkillF_Handler = nullptr;
+	UMaterialInstanceDynamic* SkillF;
+	UTextBlock* CoolTimeText_F = nullptr;
+
 
 public:
 	static void ShutDown();

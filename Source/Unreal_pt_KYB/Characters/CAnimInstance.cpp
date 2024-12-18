@@ -75,6 +75,21 @@ void UCAnimInstance::ChangedAiming(bool bInbool)
 	bBow_Aiming = bInbool;
 }
 
+void UCAnimInstance::IsRiding(bool Inbool)
+{
+	isRiding = Inbool;
+}
+
+void UCAnimInstance::SetRiderVertical(float infloat)
+{
+	Vertical = infloat;
+}
+
+void UCAnimInstance::SetRiderHorizontal(float infloat)
+{
+	Horizontal = infloat;
+}
+
 //void UCAnimInstance::OnJump()
 //{
 //	IsJump = true;

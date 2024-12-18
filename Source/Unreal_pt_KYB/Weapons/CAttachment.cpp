@@ -4,6 +4,7 @@
 #include "Components/CapsuleComponent.h"
 #include "DrawDebugHelpers.h"
 #include "GenericTeamAgentInterface.h"
+#include "../Item/CDestructibleObject.h"
 
 ACAttachment::ACAttachment()
 {
@@ -92,12 +93,23 @@ void ACAttachment::OnWeaponSweepTraceOverlap()
 	
 	if (HitResult.GetActor() == nullptr)
 		return;
+	if (HitResult.GetActor()->IsA(ACDestructibleObject::StaticClass()))
+	{
+		ACDestructibleObject* DestructibleObject = Cast<ACDestructibleObject>(HitResult.GetActor());
+		if (DestructibleObject != nullptr)
+		{
+			DestructibleObject->BreakObject(HitResult.ImpactPoint, (HitResult.TraceEnd - HitResult.TraceStart).GetSafeNormal());
+			return;
+		}
+	}
 
 	IGenericTeamAgentInterface* OwnerTeamAgent = Cast<IGenericTeamAgentInterface>(OwnerCharacter);
 	IGenericTeamAgentInterface* OtherTeamAgent = Cast<IGenericTeamAgentInterface>(HitResult.GetActor());
+
 	
 	if (OtherTeamAgent == nullptr || OwnerTeamAgent == nullptr)
 		return;
+
 
 	if (OwnerTeamAgent->GetGenericTeamId() == OtherTeamAgent->GetGenericTeamId())
 		return;
@@ -211,6 +223,12 @@ void ACAttachment::OffSweepTrace(FName InName)
 
 void ACAttachment::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+	ACDestructibleObject* DestructibleObject = Cast<ACDestructibleObject>(OtherActor);
+	if (DestructibleObject != nullptr)
+	{
+		DestructibleObject->BreakObject(SweepResult.ImpactPoint, (SweepResult.TraceEnd - SweepResult.TraceStart).GetSafeNormal());
+	}
+
 	if (OwnerCharacter == OtherActor)
 		return;
 
@@ -221,6 +239,7 @@ void ACAttachment::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedCompon
 
 	if (OwnerTeamAgent->GetGenericTeamId() == OtherTeamAgent->GetGenericTeamId())
 		return;
+
 
 	
 	

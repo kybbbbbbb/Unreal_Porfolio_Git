@@ -100,10 +100,19 @@ void UCInteractiveComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 	}
 }
 
+void UCInteractiveComponent::IsRiding(bool Inbool)
+{
+	isRiding = Inbool;
+
+}
+
 void UCInteractiveComponent::CheckInteractive()
 {
 	if (!PlayerController) return;
-
+	if (isRiding == true)
+	{
+		return;
+	}
 	FVector2D ScreenLocation(GEngine->GameViewport->Viewport->GetSizeXY() / 2);
 
 

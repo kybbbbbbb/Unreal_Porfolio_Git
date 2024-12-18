@@ -40,6 +40,10 @@ private:
 	UPROPERTY()
 	class UDecalComponent* DecalComponent;
 	bool bDecalOn = false;
+
+	void CoolTimeOn();
+	void CoolTimeOver();
+	bool bCoolTimeOn = false;
 	
 
 };

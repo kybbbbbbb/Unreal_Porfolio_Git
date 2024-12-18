@@ -7,6 +7,8 @@
 #include "../GameManager/CSoundManager.h"
 #include "CPlayer.generated.h"
 
+class ACHorse;
+
 UCLASS()
 class UNREAL_PT_KYB_API ACPlayer : public ACharacter, public IGenericTeamAgentInterface, public IIDeadable
 {
@@ -67,6 +69,10 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	class UInventorySystem* Inventory2;
+
+
+	UPROPERTY(VisibleAnywhere)
+	class UCFootIKComponent* FootIKComponent;
 
 
 
@@ -131,6 +137,8 @@ private:
 	void SubActionQ_Released();	
 	void SubActionMR_Pressed();
 	void SubActionMR_Released();
+	void SubActionE_Pressed();
+	void SubActionE_Released();
 
 	void OnInventory();
 
@@ -147,6 +155,7 @@ private:
 	bool isOnSubAction = false;
 	bool bInDash_shift = false;
 	bool bPressW = false;
+	class UCUIManager_Game* UIManager = nullptr;
 
 	FTimerHandle DoubleTapTimerHandle;
 	FTimerHandle GravityEnableTimerHandle;
@@ -162,14 +171,27 @@ private:
 	void Dead();
 	//void ignoreDamage();
 
+	bool IsRiding = false;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<ACHorse> HorseClass;
+
+	void SpawnHorse();
+
+	class ACHorse* OwnHorse;
+	class ACHorse* currenthorse;
+
 public:
 	void End_Dead() override {};
 	void End_Damaged();
 	void Opacity_zero() override {};
 	void StopAirDash_Late();
 	virtual void Landed(const FHitResult& Hit) override;
-
+	void OnRiding(ACHorse* Inhorse);
+	void OffRiding();
+	ACHorse* GetCurrentHorse() { return currenthorse; }
 	UInventorySystem* GetInventory() { return Inventory2; }
+	
 	
 
 	UFUNCTION(BlueprintCallable)

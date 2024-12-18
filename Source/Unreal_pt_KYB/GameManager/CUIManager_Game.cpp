@@ -1,6 +1,5 @@
 #include "GameManager/CUIManager_Game.h"
 #include "Kismet/GameplayStatics.h"
-#include "Components/TextBlock.h"
 #include "Components/Button.h"
 #include "CUserWidget.h"
 #include "Components/ProgressBar.h"
@@ -12,6 +11,7 @@
 #include "Components/HorizontalBoxSlot.h"
 #include "Components/UniformGridPanel.h"
 #include "Components/UniformGridSlot.h"
+#include "Materials/MaterialInstanceDynamic.h"
 
 
 UCUIManager_Game* UCUIManager_Game::Instance = nullptr;
@@ -105,10 +105,146 @@ void UCUIManager_Game::Initialize(UWorld* World)
 
 				SkillUI->SetVisibility(ESlateVisibility::Collapsed);
 
+				UImage* CoolTime_Q = Cast<UImage>(SkillUI->GetWidgetFromName(TEXT("CoolTime_Q")));
+				if (CoolTime_Q)
+				{
+					UObject* object = CoolTime_Q->GetBrush().GetResourceObject();
+					SkillQ = Cast<UMaterialInstanceDynamic>(object);
+
+					if (SkillQ == nullptr)
+					{
+						UMaterialInterface* Material = Cast<UMaterialInterface>(object);
+						if (Material)
+						{
+							SkillQ = UMaterialInstanceDynamic::Create(Material, this);
+							CoolTime_Q->SetBrushResourceObject(SkillQ);
+						}
+					}
+				}
+
+
+
+
+				UImage* CoolTime_E = Cast<UImage>(SkillUI->GetWidgetFromName(TEXT("CoolTime_E")));
+				if (CoolTime_E)
+				{
+					UObject* object = CoolTime_E->GetBrush().GetResourceObject();
+					SkillE = Cast<UMaterialInstanceDynamic>(object);
+
+					if (SkillE == nullptr)
+					{
+						UMaterialInterface* Material = Cast<UMaterialInterface>(object);
+						if (Material)
+						{
+							SkillE = UMaterialInstanceDynamic::Create(Material, this);
+							CoolTime_E->SetBrushResourceObject(SkillE);
+						}
+					}
+				}
+
+				UImage* CoolTime_F = Cast<UImage>(SkillUI->GetWidgetFromName(TEXT("CoolTime_F")));
+				if (CoolTime_F)
+				{
+					UObject* object = CoolTime_F->GetBrush().GetResourceObject();
+					SkillF = Cast<UMaterialInstanceDynamic>(object);
+
+					if (SkillF == nullptr)
+					{
+						UMaterialInterface* Material = Cast<UMaterialInterface>(object);
+						if (Material)
+						{
+							SkillF = UMaterialInstanceDynamic::Create(Material, this);
+							CoolTime_F->SetBrushResourceObject(SkillF);
+						}
+					}
+				}
+
+
+				CoolTimeText_Q = Cast<UTextBlock>(SkillUI->GetWidgetFromName(TEXT("CoolTimeText_Q")));
+				if (CoolTimeText_Q)
+				{
+					CoolTimeText_Q->SetText(FText::FromString(""));
+				}				
+				CoolTimeText_E = Cast<UTextBlock>(SkillUI->GetWidgetFromName(TEXT("CoolTimeText_E")));
+				if (CoolTimeText_E)
+				{
+					CoolTimeText_E->SetText(FText::FromString(""));
+				}
+				CoolTimeText_F = Cast<UTextBlock>(SkillUI->GetWidgetFromName(TEXT("CoolTimeText_F")));
+				if (CoolTimeText_F)
+				{
+					CoolTimeText_F->SetText(FText::FromString(""));
+				}
 			}
 	}
 
 
+}
+
+void UCUIManager_Game::Tick(float InDeltaTime)
+{
+	if (SkillQ_Handler != nullptr)
+	{
+		float remainTime = 0.0f;
+
+		remainTime = InWorld->GetTimerManager().GetTimerRemaining(*SkillQ_Handler);
+		
+		float value = remainTime / SkillQ_MaxCoolTime;
+		value = FMath::Clamp(value, 0.0f, 1.0f);
+		SkillQ->SetScalarParameterValue("Percent", value);
+
+		if (FMath::IsNearlyEqual(remainTime, -1.0f))
+		{
+			CoolTimeText_Q->SetText(FText());
+		}
+		else
+		{
+			FString string = FString::Printf(TEXT("%.1f"), remainTime);
+			CoolTimeText_Q->SetText(FText::FromString(string));
+		}
+	}
+
+	if (SkillE_Handler != nullptr)
+	{
+		float remainTime = 0.0f;
+
+		remainTime = InWorld->GetTimerManager().GetTimerRemaining(*SkillE_Handler);
+		
+		float value = remainTime / SkillE_MaxCoolTime;
+		value = FMath::Clamp(value, 0.0f, 1.0f);
+		SkillE->SetScalarParameterValue("Percent", value);
+
+		if (FMath::IsNearlyEqual(remainTime, -1.0f))
+		{
+			CoolTimeText_E->SetText(FText());
+		}
+		else
+		{
+			FString string = FString::Printf(TEXT("%.1f"), remainTime);
+			CoolTimeText_E->SetText(FText::FromString(string));
+		}
+	}
+
+	if (SkillF_Handler != nullptr)
+	{
+		float remainTime = 0.0f;
+
+		remainTime = InWorld->GetTimerManager().GetTimerRemaining(*SkillF_Handler);
+		
+		float value = remainTime / SkillF_MaxCoolTime;
+		value = FMath::Clamp(value, 0.0f, 1.0f);
+		SkillF->SetScalarParameterValue("Percent", value);
+
+		if (FMath::IsNearlyEqual(remainTime, -1.0f))
+		{
+			CoolTimeText_F->SetText(FText());
+		}
+		else
+		{
+			FString string = FString::Printf(TEXT("%.1f"), remainTime);
+			CoolTimeText_F->SetText(FText::FromString(string));
+		}
+	}
 }
 
 
@@ -340,6 +476,28 @@ void UCUIManager_Game::MonsterDeadDelegate()
 	GoalCountText->SetText(GoalCountMessage);
 }
 
+void UCUIManager_Game::SetSkillCoolTime(float InMaxCool, FTimerHandle* InHandle, FKey InKey)
+{
+	if (InKey == EKeys::Q)
+	{
+		SkillQ_Handler = InHandle;
+		SkillQ_MaxCoolTime = InMaxCool;
+	}
+	else if (InKey == EKeys::E)
+	{
+		SkillE_Handler = InHandle;
+		SkillE_MaxCoolTime = InMaxCool;
+	}
+	else if (InKey == EKeys::F)
+	{
+		SkillF_Handler = InHandle;
+		SkillF_MaxCoolTime = InMaxCool;
+	}
+
+
+
+}
+
 
 UCUIManager_Game* UCUIManager_Game::GetInstance(UWorld* Inworld)
 {
@@ -468,6 +626,7 @@ void UCUIManager_Game::SkillTextureUpdate()
 				MRImage->SetBrushFromTexture(currentImage);
 				MouseRExist = true;
 			}
+
 		}
 		else if (KeyName == EKeys::Q)
 		{
@@ -479,13 +638,26 @@ void UCUIManager_Game::SkillTextureUpdate()
 				QImage->SetBrushFromTexture(currentImage);
 				QExist = true;
 			}
+			SkillQ_MaxCoolTime = (*CurrentSubActiondata)[i]->GetMaxCoolTime();
+			SkillQ_Handler = (*CurrentSubActiondata)[i]->GetHandler();
 		}
 		else if (KeyName == EKeys::E)
 		{
-			EExist = true;
+			UImage* EImage = Cast<UImage>(SkillUI->GetWidgetFromName(TEXT("Skill_E_Image")));
+			UTexture2D* currentImage = (*CurrentSubActiondata)[i]->GetSkillImage();
+
+			if (EImage != nullptr && currentImage != nullptr)
+			{
+				EImage->SetBrushFromTexture(currentImage);
+				EExist = true;
+			}
+			SkillE_MaxCoolTime = (*CurrentSubActiondata)[i]->GetMaxCoolTime();
+			SkillE_Handler = (*CurrentSubActiondata)[i]->GetHandler();
 		}
 		else if (KeyName == EKeys::F)
 		{
+			SkillF_MaxCoolTime = (*CurrentSubActiondata)[i]->GetMaxCoolTime();
+			SkillF_Handler = (*CurrentSubActiondata)[i]->GetHandler();
 			FExist = true;
 		}
 

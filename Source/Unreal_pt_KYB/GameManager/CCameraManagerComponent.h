@@ -113,6 +113,7 @@ public:
 
 	void DefaultCameraChange(ECameraEnum InCameraNum);
 	void SetbCameraTick(bool InBool);
+	void SetbCameraAttack(bool InBool);
 
 private:
 	void SetCameraState(ECameraEnum NewState, float CustomDuration = -1.0f);
@@ -133,5 +134,6 @@ private:
 	bool bIsCameraAction = false;
 
 	bool StopCameraAction = false;
+	bool StopAttackAction = false;
 
 };

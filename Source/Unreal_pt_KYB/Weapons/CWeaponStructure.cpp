@@ -15,7 +15,7 @@
 #include "../Components/CWeaponComponent_reset.h"
 #include "../Characters/CMonsters_AI.h"
 
-void FDoActionData::DoAction(ACharacter* InOwner)
+void FDoActionData::DoAction(ACharacter* InOwner, FName sectionName)
 {
 	UCMovementComponent* movement;
 
@@ -48,36 +48,29 @@ void FDoActionData::DoAction(ACharacter* InOwner)
 	
 
 	if (!!Montage)
-		InOwner->PlayAnimMontage(Montage, PlayRate);
+	{
+		if (sectionName != "")
+		{
+			//InOwner->PlayAnimMontage(Montage, PlayRate, sectionName);
+			UAnimInstance* AnimInstance = InOwner->GetMesh()->GetAnimInstance();
 
-	//if (InOwner->IsA(ACPlayer::StaticClass()))
-	//{
-	//	//UCSoundManager::GetInstance()->PlaySound2D("SC_Player_Attack_01", InOwner->GetWorld());
-	//	
-	//	ACPlayer* Player = Cast<ACPlayer>(InOwner);
-	//	UCWeaponComponent_reset* weaponcomp = Player->FindComponentByClass<UCWeaponComponent_reset>();
-	//	UCSoundManager* soundManager = UCSoundManager::GetInstance();
+			// 몽타주 재생
+			AnimInstance->Montage_Play(Montage, PlayRate);
 
-	//	if (weaponcomp == nullptr)
-	//		return;
-	//	EWeaponType type = weaponcomp->GetType();
+			// 해당 섹션으로 이동
+			AnimInstance->Montage_JumpToSection(sectionName, Montage);
 
-	//	if (type == EWeaponType::Fist)
-	//	{
-	//		//int random = FMath::RandRange(0, 5);
-	//		//if(random == 3)
-	//			UCSoundManager::GetInstance()->PlaySound2D("SC_Player_Attack_01", InOwner->GetWorld());
-	//	}
-	//	else if (type == EWeaponType::Sword)
-	//	{
-	//		
-	//	}
-	//	else if (type == EWeaponType::Bow)
-	//	{
-	//		//soundManager->PlaySound3D("SC_Player_Bow_Hit", InOther->GetActorLocation(), Player->GetWorld());
-	//	}
+			// 현재 섹션 이후에 다른 섹션이 실행되지 않도록 설정
+			AnimInstance->Montage_SetNextSection(sectionName, FName("None"), Montage);
+			
+		}
+		else
+		{
+			InOwner->PlayAnimMontage(Montage, PlayRate);
 
-	//}
+		}
+	}
+
 
 
 

@@ -12,10 +12,34 @@ void UCDoAction_Combo::DoAction()
 
 	if (State->IsSubActionMode() == true)
 		return;
+
 	ESubActionEnum skillnumber = GetCurrentSubActionSkillNumber();
+
 	if (skillnumber != ESubActionEnum::NoExistSkill)
 	{
-		DoActionDatas[(int8)skillnumber].DoAction(OwnerCharacter);
+		if (skillnumber == ESubActionEnum::E)
+		{
+			int ran = FMath::RandRange(0, 2);
+			switch (ran)
+			{
+			case 0:
+				DoActionDatas[(int8)skillnumber].DoAction(OwnerCharacter,"section0");
+				break;
+			case 1:
+				DoActionDatas[(int8)skillnumber].DoAction(OwnerCharacter,"section1");
+				break;
+			case 2:
+				DoActionDatas[(int8)skillnumber].DoAction(OwnerCharacter, "section2");
+				break;
+			default:
+				break;
+			}
+		}
+		else
+		{
+			DoActionDatas[(int8)skillnumber].DoAction(OwnerCharacter);
+		}
+
 		State->OnSubActionMode();
 		Super::DoAction();
 		return;
