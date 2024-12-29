@@ -35,6 +35,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) 
 	int32 GoalCount;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	FVector Location;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	bool bIsAccepted = false;
 
 	void AcceptQuest();

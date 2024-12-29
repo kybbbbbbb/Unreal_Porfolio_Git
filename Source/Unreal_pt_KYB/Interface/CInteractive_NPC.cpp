@@ -1,5 +1,7 @@
 #include "Interface/CInteractive_NPC.h"
 #include "../GameManager/CUIManager_Game.h"
+#include "../Characters/CPlayer.h"
+#include "../Components/CNaviPathSystem.h"
 
 ACInteractive_NPC::ACInteractive_NPC()
 {
@@ -54,7 +56,18 @@ void ACInteractive_NPC::AcceptQuest_NPC()
 		//TODO: 추후 퀘스트 넘버를 받을 수 있게 UI매니저에서 델리게이트로 버튼 연결
 	FQuestTable* data = QuestTable->FindRow<FQuestTable>(FName("1"), TEXT("No Find"));
 	data->AcceptQuest();
-	
+
+	if (data->Location != FVector::ZeroVector)
+	{
+		APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
+		ACPlayer* player = Cast<ACPlayer>(PlayerController->GetPawn());
+		if (player != nullptr)
+		{
+			UCNaviPathSystem* navi = player->FindComponentByClass<UCNaviPathSystem>();
+			navi->SetTargetLocation(data->Location);
+		}
+
+	}
 	UIManager->QuestUIOn(data);
 	
 }

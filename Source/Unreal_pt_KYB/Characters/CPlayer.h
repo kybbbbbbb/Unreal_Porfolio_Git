@@ -4,10 +4,10 @@
 #include "GameFramework/Character.h"
 #include "GenericTeamAgentInterface.h"
 #include "IDeadable.h"
-#include "../GameManager/CSoundManager.h"
 #include "CPlayer.generated.h"
 
 class ACHorse;
+class UCSoundManager;
 
 UCLASS()
 class UNREAL_PT_KYB_API ACPlayer : public ACharacter, public IGenericTeamAgentInterface, public IIDeadable
@@ -73,6 +73,9 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	class UCFootIKComponent* FootIKComponent;
+
+	UPROPERTY(VisibleAnywhere)
+	class UCNaviPathSystem* CNaviPathSystem;
 
 
 

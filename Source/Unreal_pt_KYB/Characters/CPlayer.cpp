@@ -19,6 +19,8 @@
 #include "Components/CapsuleComponent.h"
 #include "../Components/CFootIKComponent.h"
 #include "CHorse.h"
+#include "../GameManager/CSoundManager.h"
+#include "../Components/CNaviPathSystem.h"
 
 ACPlayer::ACPlayer()
 {
@@ -36,6 +38,7 @@ ACPlayer::ACPlayer()
 	FootIKComponent = CreateDefaultSubobject<UCFootIKComponent>("FootIKComponent");
 
 	CameraManagerComponent = CreateDefaultSubobject<UCCameraManagerComponent>("CameraManagerComponent");
+	CNaviPathSystem = CreateDefaultSubobject<UCNaviPathSystem>("CNaviPathSystem");
 
 	SpringArm->SetupAttachment(GetMesh());
 	Camera->SetupAttachment(SpringArm);
@@ -378,6 +381,7 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAction("S", EInputEvent::IE_Pressed, this, &ACPlayer::PressS);
 	PlayerInputComponent->BindAction("D", EInputEvent::IE_Pressed, this, &ACPlayer::PressD);
 	PlayerInputComponent->BindAction("A", EInputEvent::IE_Pressed, this, &ACPlayer::PressA);
+	PlayerInputComponent->BindAction("NaviTest", EInputEvent::IE_Pressed, CNaviPathSystem, &UCNaviPathSystem::NaviOn);
 
 	PlayerInputComponent->BindAction("DashAttack_shift", EInputEvent::IE_Pressed, this, &ACPlayer::DashAttack_shift_On);
 	PlayerInputComponent->BindAction("DashAttack_shift", EInputEvent::IE_Released, this, &ACPlayer::DashAttack_shift_Off);
