@@ -13,7 +13,8 @@ void UCAnimNotify_StopTime::Notify(USkeletalMeshComponent* MeshComp, UAnimSequen
 	Super::Notify(MeshComp, Animation, EventReference);
 
 	UWorld* world = MeshComp->GetOwner()->GetWorld();
-		//패링시 타임스탑 추가 (20241025)----------------------------------------
+
+	//패링시 타임스탑 추가 (20241025)----------------------------------------
 	if (world == nullptr)
 		return;
 

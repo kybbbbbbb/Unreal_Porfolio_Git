@@ -1,6 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "Notify/CAnimNotify_AttachString.h"
 #include "../Components/CStateComponent.h"
 #include "../Components/CWeaponComponent_reset.h"

@@ -78,9 +78,6 @@ void UCAnimNotify_ApproachAttack_AI::NotifyBegin(USkeletalMeshComponent* MeshCom
 	direction.Normalize();  // 방향 벡터 정규화
 
 	
-	//DrawDebugPoint(ownerCharacter->GetWorld(), finalTargetLocation, 10.0f, FColor::Blue, false, 5.0f);
-
-	
 	// 속도 계산 (거리 / 시간)
 	launchVelocity = (direction * LaunchRate);
 
@@ -102,11 +99,7 @@ void UCAnimNotify_ApproachAttack_AI::NotifyBegin(USkeletalMeshComponent* MeshCom
 }
 
 void UCAnimNotify_ApproachAttack_AI::NotifyTick(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, float FrameDeltaTime, const FAnimNotifyEventReference& EventReference)
-{
-
-
-
-}
+{}
 
 
 

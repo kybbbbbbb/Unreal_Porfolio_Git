@@ -5,17 +5,13 @@
 
 UInventorySystem::UInventorySystem()
 {
-	
-
 }
 
 
 
 void UInventorySystem::AddItem(FPrimaryAssetId itemID)
 {
-	
 	items.Add(itemID);
-	
 	
 	UCUIManager_Game* instance = UCUIManager_Game::GetInstance(GetWorld());
 	if (instance == nullptr)
@@ -25,8 +21,9 @@ void UInventorySystem::AddItem(FPrimaryAssetId itemID)
 
 void UInventorySystem::Beginplay()
 {
+	//특정 폴더에 아이템을 몰아두고 데이터 가져옴
+	//
 	FAssetRegistryModule* AssetRegistryModule = FModuleManager::LoadModulePtr<FAssetRegistryModule>("AssetRegistry");
-
 
 	if (AssetRegistryModule)
 	{
@@ -35,8 +32,6 @@ void UInventorySystem::Beginplay()
 		TArray<FString> PathsToScan;
 		PathsToScan.Add("/Game/04_Object/Item/itemAsset");
 		AssetRegistry.ScanPathsSynchronous(PathsToScan);
-
-
 
 		FName AssetPath = FName("/Game/04_Object/Item/itemAsset");
 		TArray<FAssetData> AssetData;
@@ -59,5 +54,4 @@ void UInventorySystem::Beginplay()
 		}
 	}
 	items.Empty();
-
 }

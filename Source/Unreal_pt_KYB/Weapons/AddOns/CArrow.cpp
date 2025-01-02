@@ -13,8 +13,6 @@ ACArrow::ACArrow()
 
 	Projectile->ProjectileGravityScale = 0.0f;
 
-
-
 	//바디시뮬레이션 트루
 	Capsule->BodyInstance.bNotifyRigidBodyCollision = true;
 	Capsule->SetCollisionProfileName("BlockAll");
@@ -23,6 +21,7 @@ ACArrow::ACArrow()
 void ACArrow::BeginPlay()
 {
 	Super::BeginPlay();
+
 	UNiagaraComponent* niagaraEffect = Cast<UNiagaraComponent>(GetComponentByClass(UNiagaraComponent::StaticClass()));
 	if (niagaraEffect != nullptr)
 	{
@@ -31,6 +30,7 @@ void ACArrow::BeginPlay()
 
 	Projectile->SetActive(false);
 
+	//비긴 시 콜리전은 잠시 꺼둠
 	Capsule->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	Capsule->OnComponentHit.AddDynamic(this, &ACArrow::OnComponentHit);
 
@@ -62,10 +62,13 @@ void ACArrow::Shoot(const FVector& InForward)
 
 
 	UCSoundManager::GetInstance()->PlaySound3D("SC_Player_Bow_Whosh",GetActorLocation(),GetWorld());
+
+	//발사 할 때 콜리전 On
 	Capsule->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 
 }
 
+//arrow가 hit될 시 로직
 void ACArrow::OnComponentHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
 	SetLifeSpan(LifeSpawnAfterCollision);
