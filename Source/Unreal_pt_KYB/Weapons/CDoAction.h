@@ -10,7 +10,7 @@
  
   @ 이  름: UCDoAction
   @ 설  명: WeaponAsset에서 호출 받아 공격을 수행
-  @ 콜루트: Player->WeaponComponent->WeaponAsset->DoAction
+  @ 콜루트: Player->WeaponComponent->WeaponAsset->DoAction (DoAction_bow, DoAction_combo)
   @ TODO: X
  
 ------------------------------------------------------------------------*/

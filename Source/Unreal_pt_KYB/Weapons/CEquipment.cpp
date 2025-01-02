@@ -7,16 +7,17 @@ void UCEquipment::BeginPlay(ACharacter* InOwner, const FEquipmentData& InData)
 {
 	OwnerCharacter = InOwner;
 
-	Data = InData;
-	
+	Data = InData;	
 
 	MovementComponent = Cast<UCMovementComponent>(OwnerCharacter->GetComponentByClass(UCMovementComponent::StaticClass()));
+	
 	StateComponent = Cast<UCStateComponent>(OwnerCharacter->GetComponentByClass(UCStateComponent::StaticClass()));
 }
 
 void UCEquipment::Equip_Implementation()
 {
 	StateComponent->SetEquipMode();
+	
 	if (Data.bCanMove == false)
 		MovementComponent->Stop();
 	if (Data.bUseControlRotation == true)
@@ -44,7 +45,6 @@ void UCEquipment::Begin_Equip_Implementation()
 
 	if (OnEquipmentBeginEquip.IsBound())
 		OnEquipmentBeginEquip.Broadcast();
-
 }
 
 //장착이 끝나면 해야할 작업들, 노티파이 호출
@@ -56,7 +56,6 @@ void UCEquipment::End_Equip_Implementation()
 		MovementComponent->Move();
 
 	StateComponent->SetIdleMode();
-
 }
 
 //장착이 해제되면 해야할 작업들

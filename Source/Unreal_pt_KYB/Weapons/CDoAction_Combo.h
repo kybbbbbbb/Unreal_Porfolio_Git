@@ -4,6 +4,15 @@
 #include "Weapons/CDoAction.h"
 #include "CDoAction_Combo.generated.h"
 
+/*------------------------------------------------------------------------
+
+  @ 이  름: UCDoAction_Combo
+  @ 설  명: 일반 근거리 무기의 공격 호출
+  @ 콜루트: Player->WeaponComponent->WeaponAsset->DoAction(DoAction_Combo0
+  @ TODO: X
+
+------------------------------------------------------------------------*/
+
 UCLASS()
 class UNREAL_PT_KYB_API UCDoAction_Combo : public UCDoAction
 {
@@ -24,10 +33,8 @@ public:
 	
 
 private:
-	
 	int8 index=0;
 	int8 index_Air=16;
-
 
 	bool bEnable = false;
 	bool bExist = false;

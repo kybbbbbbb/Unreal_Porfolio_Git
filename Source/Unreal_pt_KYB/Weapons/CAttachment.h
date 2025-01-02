@@ -7,7 +7,14 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_FiveParams(FAttachmentBeginOverlap, class ACharacter*, InAttacker, AActor*, InAttackCauser, class ACharacter*, InOther, const FHitResult&, SweepResult, UPrimitiveComponent*, OverlapComponent);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FAttachmentEndOverlap, class ACharacter*, InAttacker, class ACharacter*, InOther);
+/*------------------------------------------------------------------------
 
+  @ 이  름: CAttachment
+  @ 설  명: WeaponAsset에서 호출 받아 장착 수행
+  @ 콜루트: Player->WeaponComponent->WeaponAsset->Attachment
+  @ TODO: X
+
+------------------------------------------------------------------------*/
 
 UCLASS()
 class UNREAL_PT_KYB_API ACAttachment : public AActor
@@ -62,8 +69,6 @@ public:
 	void OnSweepTrace(FName InName);
 	void OffSweepTrace(FName InName);
 
-
-	
 	UFUNCTION()
 	void OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 	UFUNCTION()

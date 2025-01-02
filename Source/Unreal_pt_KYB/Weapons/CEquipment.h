@@ -7,15 +7,18 @@
 
 
 //어태치먼트와의 연결을 위한 델리게이트.(비긴, 엔드)
-//무기를 뗐다 붙였다하기 위함
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FEquipmentBeginEquip);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FEquipmentUnEquip);
 
+/*------------------------------------------------------------------------
 
+  @ 이  름: UCEquipment
+  @ 설  명: WeaponAsset에서 장착데이터를 받아 장착에 필요한 상태 변경, 현재 장착 데이터 저장
+  @ 콜루트: Player->WeaponComponent->WeaponAsset->Equipment
+  @ TODO: X
 
-//장착에 관련된 역할을 수행한다.
-//주 기능: 이큅데이터 저장, 스테이트컴포에 이큅중으로 상태변경, 이큅중 무브먼트 결정
-//과정: 웨폰에셋에서 비긴플레이로 호출 받으며, 이큅데이터도 함께 받아 데이터에 따른 동작을 한다. 
+------------------------------------------------------------------------*/
+ 
 UCLASS()
 class UNREAL_PT_KYB_API UCEquipment : public UObject
 {
@@ -25,7 +28,7 @@ public:
 	void BeginPlay(class ACharacter* InOwner, const FEquipmentData& InData);
 
 private:
-	UPROPERTY(VisibleDefaultsOnly)//디버깅용
+	UPROPERTY(VisibleDefaultsOnly)
 	class ACharacter* OwnerCharacter;
 	UPROPERTY(VisibleDefaultsOnly)
 	class UCMovementComponent* MovementComponent;
@@ -55,7 +58,6 @@ public:
 public:
 	FEquipmentBeginEquip OnEquipmentBeginEquip;
 	FEquipmentUnEquip OnEquipmentUnEquip;
-
 
 private:
 	FEquipmentData Data;

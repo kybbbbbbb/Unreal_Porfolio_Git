@@ -21,18 +21,12 @@ void UCSubAction_RightMouse::BeginPlay(ACharacter* InOwner, ACAttachment* InAtta
 
 void UCSubAction_RightMouse::Pressed()
 {
-	
-	
 }
 
 void UCSubAction_RightMouse::Released()
-{
-	
+{	
 }
 
 void UCSubAction_RightMouse::StopSubAction()
-{
-	
-
-	
+{	
 }

@@ -9,15 +9,15 @@
 /*------------------------------------------------------------------------
  
   @ 이  름: WeaponStructure
-  @ 설  명: 모든 무기 데이터와 액션 정보를 가지고 있음, 실질적인 액션도 여기서 실행
-  @ 콜루트: Player->WeaponComponent->WeaponAsset->DoAction->WeaponData(해당 구조체)
+  @ 설  명: 무기 데이터와 액션 정보를 가지고 있음, 실질적인 액션도 여기서 실행
+  @ 콜루트: WeaponAsset에 포함, DoAction시 참조됨
+
   @ TODO: 구조체 내부 값을 추가하거나 제거하고 컴파일시 언리얼상의 구조체 데이터가 사라짐
   구조체 내부구조가 바뀌면 언리얼에서 다시 구조 검사를 진행해서 사라진다고 함, 추후 구조체 데이터를 따로 저장할 수 있는 방법 필요
  
 ------------------------------------------------------------------------*/
+
 class ACSubAction_RangeSkill_BP_Base;
-
-
 
 USTRUCT()
 struct FEquipmentData
@@ -100,9 +100,6 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FVector EffectScale = FVector::OneVector;
 
-
-
-
 public:
 	void SendDamage(class ACharacter* InAttaker, AActor* InAttackCauser, class ACharacter* InOther, const FHitResult& SweepResult, UPrimitiveComponent* OverlapComponent);
 	void PlayHitStop(UWorld* InWorld);
@@ -110,6 +107,10 @@ public:
 	void PlayEffect(UWorld* InWorld, const FVector& InLocation, const FRotator& InRotator);
 };
 
+
+//대미지 전달을 위한 FDamageEvent구조체 제작
+//AI로직 짜려면 필수적 
+//TODO: 추후 세부데이터를 추가해서 더 다양하게 피격 데미지 적용해볼 것.
 USTRUCT(BlueprintType)
 struct FActionDamageEvent : public FDamageEvent
 {

@@ -10,6 +10,15 @@ enum class ESubActionEnum : uint8
 	NoExistSkill = 9,RightMouseButton = 10, Q,E
 };
 
+/*------------------------------------------------------------------------
+
+  @ 이  름: UCSubAction_RightMouse
+  @ 설  명: 모든 스킬의 부모 클래스, 스킬 제작 시 상속 받아 제작해야함
+  @ 콜루트: Player->WeaponComponent->WeaponAsset->DoAction->각 스킬클래스
+  @ TODO: X
+
+------------------------------------------------------------------------*/
+
 UCLASS()
 class UNREAL_PT_KYB_API UCSubAction_RightMouse : public UObject
 {

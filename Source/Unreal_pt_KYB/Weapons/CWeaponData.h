@@ -4,6 +4,15 @@
 #include "UObject/NoExportTypes.h"
 #include "CWeaponData.generated.h"
 
+/*------------------------------------------------------------------------
+
+  @ 이  름: UCWeaponData
+  @ 설  명: WeaponAsset에서 만들어진 기타 클래스를 저장해놓는 클래스
+  @ 콜루트: WeaponAsset에서 생성
+  @ TODO: X
+
+------------------------------------------------------------------------*/
+
 UCLASS()
 class UNREAL_PT_KYB_API UCWeaponData : public UObject
 {
@@ -27,7 +36,4 @@ private:
 	class UCEquipment* EquipmentResult;
 	UPROPERTY()
 	class UCDoAction* DoActionResult;
-
-
-
 };

@@ -6,35 +6,48 @@
 #include "AddOns/CArrow.h"
 #include "CDoAction_Bow.generated.h"
 
+/*------------------------------------------------------------------------
+
+  @ 이  름: CDoAction_Bow
+  @ 설  명: WeaponAsset에서 호출 받아 활 공격을 수행
+  @ 콜루트: Player->WeaponComponent->WeaponAsset->DoAction_Bow
+  @ TODO: X
+
+------------------------------------------------------------------------*/
+
 UCLASS(Blueprintable)
 class UNREAL_PT_KYB_API UCDoAction_Bow : public UCDoAction
 {
 	GENERATED_BODY()
 	
 private:
+	//생성할 활 BP 클래스
 	UPROPERTY(EditDefaultsOnly, Category = "Arrow")
 	TSubclassOf<class ACArrow> ArrowClass;
 
-private:
-	void CreateArrow();
+	UPROPERTY()
+	TArray<class ACArrow*> Arrows;
+
+	TSet<AActor*> AttackedActor;
+
+	FVector OriginLocation;
+	const bool* bEquipped;
+	float* Bending;
+	bool bAttachedString = false;
+	bool isReload = false;
+	int8 index = 0;
+
 public:
 	class ACArrow* GetAttachedArrow();
-
-public:
 	UCDoAction_Bow();
-public:
-	void BeginPlay(ACharacter* Owner, class ACAttachment* InAttachment, class UCEquipment* InEquipment, const TArray<FDoActionData>& InData, TArray<FHitData>& InHitDatas, TArray<class UCSubAction_RightMouse*>& InSubActionData) override;
 
-public:
+	void BeginPlay(ACharacter* Owner, class ACAttachment* InAttachment, class UCEquipment* InEquipment, const TArray<FDoActionData>& InData, TArray<FHitData>& InHitDatas, TArray<class UCSubAction_RightMouse*>& InSubActionData) override;
 	void DoAction() override;
 	void Begin_DoAction() override;
 	void End_DoAction()	override;
-
-public:
 	void OnBeginEquip() override;
 	void OnUnEquip() override;
 
-public:
 	FORCEINLINE void OnAttachString() { bAttachedString = true; }
 	FORCEINLINE void OffAttachString() { bAttachedString = false; }
 	FORCEINLINE void OnReload_Bow() { isReload = true; }
@@ -48,28 +61,16 @@ private:
 	UFUNCTION()
 	void OnArrowEndPlay(class ACArrow* InDestroyer);
 
-private:
 	UPROPERTY()
 	class USkeletalMeshComponent* SkeletalMesh;
+	
 	UPROPERTY()
 	class UPoseableMeshComponent* PosableMesh;
+
+	void CreateArrow();
 
 public:
 	void Tick(float InDeltaTime) override;
 	void OnAttachmentBeginOverlap(class ACharacter* InAttacker, AActor* InAttackCauser, class ACharacter* InOther, const FHitResult& SweepResult, UPrimitiveComponent* OverlapComponent) override;
-
-private:
-	FVector OriginLocation;
-private:
-	UPROPERTY()
-	TArray<class ACArrow*> Arrows;
-	TSet<AActor*> AttackedActor;
-
-private:
-	const bool* bEquipped;
-	float* Bending;
-	bool bAttachedString = false;
-	bool isReload = false;
-	int8 index = 0;
 
 };

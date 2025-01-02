@@ -69,26 +69,13 @@ void UCWeaponAsset::BeginPlay(ACharacter* OwnerCharacter, UCWeaponData**OutWeapo
 					SubAction->BeginPlay(OwnerCharacter, attachment, doAction);
 				}
 			}
-
 		}
-		
 	}
 	
+
+	//웨폰데이터클래스에 저장해서 보관
 	*OutWeaponData = NewObject<UCWeaponData>();
 	(*OutWeaponData)->AttachmentResult = attachment;
 	(*OutWeaponData)->EquipmentResult = equipment;
 	(*OutWeaponData)->DoActionResult= doAction;
-
 }
-
-
-
-
-//void UCWeaponAsset::DoAction()
-//{
-//	if (DoActionResult != nullptr)
-//	{
-//		GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Blue, "WeaponAsset_DoAction On");
-//		DoActionResult->DoAction();
-//	}
-//}

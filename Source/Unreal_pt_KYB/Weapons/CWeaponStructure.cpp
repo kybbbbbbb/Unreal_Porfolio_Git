@@ -62,22 +62,16 @@ void FDoActionData::DoAction(ACharacter* InOwner, FName sectionName)
 
 			// 현재 섹션 이후에 다른 섹션이 실행되지 않도록 설정
 			AnimInstance->Montage_SetNextSection(sectionName, FName("None"), Montage);
-			
 		}
 		else
 		{
 			InOwner->PlayAnimMontage(Montage, PlayRate);
-
 		}
 	}
 
 
 
-
-
 	//-------------24년 10월 5일 추가 기능 (외부 범위 발동 스킬)-------------//
-	
-	
 	APlayerController* PlayerController;
 	PlayerController = InOwner->GetController<APlayerController>();
 
@@ -130,11 +124,7 @@ void FDoActionData::DoAction(ACharacter* InOwner, FName sectionName)
 		{
 			UGameplayStatics::SpawnEmitterAtLocation(InOwner->GetWorld(), ParticleSystem_DoAction, hitResult.Location + FVector(0, 0, 5));
 		}
-
 	}
-
-	//--------------------------------------------------------------------//
-
 }
 
 void FDoActionData::SpawnAttackableSkillTimer(FVector Location, ACharacter* InOwner)
@@ -184,11 +174,9 @@ void FHitData::SendDamage(ACharacter* InAttaker, AActor* InAttackCauser, ACharac
 	else if(ACMonsters_AI* monster = Cast<ACMonsters_AI>(InAttaker))
 	{
 		UCSoundManager* soundManager = UCSoundManager::GetInstance();
-		//if (monster->GetMonsterName().ToString() == "Goblin")
 		{
 			soundManager->PlaySound3D("SC_Player_Sword_Fresh", InOther->GetActorLocation(), monster->GetWorld());
 		}
-
 	}
 
 	FActionDamageEvent e;
@@ -196,8 +184,6 @@ void FHitData::SendDamage(ACharacter* InAttaker, AActor* InAttackCauser, ACharac
 	e.HitData = this;
 	e.OverlapComponent = OverlapComponent;
 	InOther->TakeDamage(Power, e, InAttaker->GetController(), InAttackCauser);
-
-
 }
 
 
@@ -239,9 +225,7 @@ void FHitData::PlayHitStop(UWorld* InWorld)
 	
 	FTimerHandle timerHandle;
 	InWorld->GetTimerManager().SetTimer(timerHandle, timerDelegate, StopTime*0.2f, false);
-
 }
-
 
 
 void FHitData::PlaySountWave(ACharacter* InOwner)
@@ -268,5 +252,4 @@ void FHitData::PlayEffect(UWorld* InWorld, const FVector& InLocation, const FRot
 	{
 		UGameplayStatics::SpawnEmitterAtLocation(InWorld, ParticleSystem, InLocation + EffectLocation, InRotator, EffectScale);
 	}
-
 }

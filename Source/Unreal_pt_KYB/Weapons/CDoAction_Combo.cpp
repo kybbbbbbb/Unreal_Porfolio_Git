@@ -17,6 +17,7 @@ void UCDoAction_Combo::DoAction()
 
 	if (skillnumber != ESubActionEnum::NoExistSkill)
 	{
+		//E스킬은 몽타주 구간별 특별 처리
 		if (skillnumber == ESubActionEnum::E)
 		{
 			int ran = FMath::RandRange(0, 2);
@@ -70,6 +71,7 @@ void UCDoAction_Combo::DoAction()
 
 }
 
+//AI의 공격 수행
 void UCDoAction_Combo::DoAction_AI(int8 InAttackNumber)
 {
 	if (DoActionDatas.Num() < 1)
@@ -84,9 +86,6 @@ void UCDoAction_Combo::DoAction_AI(int8 InAttackNumber)
 		index = InAttackNumber;
 		return;
 	}
-
-
-
 }
 
 void UCDoAction_Combo::Begin_DoAction()
@@ -132,7 +131,6 @@ void UCDoAction_Combo::OnAttachmentBeginOverlap(ACharacter* InAttacker, AActor* 
 		return;
 	if (AttackedActor.Contains(InOther))
 		return;
-
 
 	AttackedActor.Add(InOther);
 

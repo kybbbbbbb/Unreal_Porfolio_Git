@@ -7,6 +7,15 @@
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FArrowHit, class AActor*, InCauser, class ACharacter*, InOtherCharacter, const FHitResult&, Hit);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FProjectileEndPlay, class ACArrow*, InDestoryer);
 
+/*------------------------------------------------------------------------
+
+  @ 이  름: ACArrow
+  @ 설  명: DoAction_Bow에서 공격 수행시 생성, 프로젝타일.
+  @ 콜루트: DoAction_bow -> ACArrow생성
+  @ TODO: X
+
+------------------------------------------------------------------------*/
+
 UCLASS()
 class UNREAL_PT_KYB_API ACArrow : public AActor
 {

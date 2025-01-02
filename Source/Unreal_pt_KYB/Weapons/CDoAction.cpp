@@ -5,10 +5,8 @@
 
 
 UCDoAction::UCDoAction()
-{
-	
+{}
 
-}
 void UCDoAction::BeginPlay(ACharacter* Owner, class ACAttachment* InAttachment, class UCEquipment* InEquipment, const TArray<FDoActionData>& InData, TArray<FHitData>& InHitDatas, TArray<class UCSubAction_RightMouse*>& InSubActionData)
 {
 	OwnerCharacter = Owner;
@@ -30,6 +28,7 @@ void UCDoAction::DoAction()
 	State->SetActionMode();
 }
 
+//AI 캐릭터는 공격 시, 해당 함수를 사용한다. 
 void UCDoAction::DoAction_AI(int8 InAttackNumber)
 {
 	bInAction = true;
@@ -41,6 +40,7 @@ void UCDoAction::Begin_DoAction()
 	bBeginAction = true;
 }
 
+//공격 종료시 노티파이에서 호출.
 void UCDoAction::End_DoAction()
 {
 	State->SetIdleMode();
@@ -49,11 +49,13 @@ void UCDoAction::End_DoAction()
 	bBeginAction = false;
 }
 
+//공격 종료 시, 노티파이에서 호출.
 void UCDoAction::ResetHitresult()
 {
 	AttackedActor.Empty();
 }
 
+//현재 활성화된 스킬을 리턴하는 함수.
 ESubActionEnum UCDoAction::GetCurrentSubActionSkillNumber()
 {
 	if (SubActionData == nullptr)

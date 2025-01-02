@@ -10,9 +10,7 @@
 #include "Weapons/CSubAction_RightMouse.h"
 
 UCDoAction_Bow::UCDoAction_Bow()
-{
-
-}
+{}
 
 void UCDoAction_Bow::BeginPlay(ACharacter* Owner, class ACAttachment* InAttachment, class UCEquipment* InEquipment, const TArray<FDoActionData>& InData, TArray<FHitData>& InHitDatas, TArray<class UCSubAction_RightMouse*>& InSubActionData)
 {
@@ -34,6 +32,7 @@ void UCDoAction_Bow::DoAction()
 {
 	if(State->IsIdleMode() == false) return;
 	if(State->IsEquipMode() == true) return;
+	
 	if (State->IsSubActionMode() == false)
 	{
 		Super::DoAction();
@@ -46,7 +45,7 @@ void UCDoAction_Bow::DoAction()
 	isReload = false;
 	Super::DoAction();
 
-
+	//활성화 된 스킬이 있으면 해당 스킬넘버로 공격 실행
 	ESubActionEnum skillnumber = GetCurrentSubActionSkillNumber();
 	if (skillnumber != ESubActionEnum::NoExistSkill)
 	{
@@ -64,6 +63,8 @@ void UCDoAction_Bow::DoAction()
 
 }
 
+//마우스 클릭시 실행되는 함수
+//주요기능: 화살 디태치 후 발사, 밴딩값 재조정
 void UCDoAction_Bow::Begin_DoAction()
 {
 	Super::Begin_DoAction();
@@ -71,10 +72,8 @@ void UCDoAction_Bow::Begin_DoAction()
 	*Bending = 0.0f;
 	bAttachedString = false;
 
-
 	ACArrow* arrow = GetAttachedArrow();
 	arrow->DetachFromActor(FDetachmentTransformRules(EDetachmentRule::KeepWorld, true));
-
 
 	arrow->OnHit.AddDynamic(this, &UCDoAction_Bow::OnArrowHit);
 	arrow->OnEndPlay.AddDynamic(this, &UCDoAction_Bow::OnArrowEndPlay);
@@ -84,10 +83,7 @@ void UCDoAction_Bow::Begin_DoAction()
 	arrow->Shoot(forward);
 
 	AttackedActor.Empty();
-
-
 }
-
 
 
 void UCDoAction_Bow::End_DoAction()
@@ -99,6 +95,7 @@ void UCDoAction_Bow::End_DoAction()
 	AttackedActor.Empty();
 }
 
+//노티파이 호출
 void UCDoAction_Bow::OnBeginEquip()
 {
 	Super::OnBeginEquip();
@@ -110,6 +107,8 @@ void UCDoAction_Bow::OnUnEquip()
 {
 	Super::OnUnEquip();
 	PosableMesh->SetBoneLocationByName("String", OriginLocation, EBoneSpaces::ComponentSpace);
+	
+	//장착 해제시 화살 삭제 로직
 	for (int32 i = Arrows.Num() - 1; i >= 0; i--)
 	{
 		ACArrow* arrow = Arrows[i];
@@ -124,13 +123,14 @@ void UCDoAction_Bow::OnUnEquip()
 	bAttachedString = false;
 }
 
+//arrow에 바인딩 되어 있기에, 화살에 충돌 발생시 호출됨
 void UCDoAction_Bow::OnArrowHit(AActor* InCauser, ACharacter* InOtherCharacter, const FHitResult& Hit)
 {
 	if(HitDatas.Num() < 1) return;
 
-	
 	HitDatas[10].SendDamage(OwnerCharacter, InCauser, InOtherCharacter, Hit , nullptr);
 }
+
 
 void UCDoAction_Bow::OnArrowEndPlay(ACArrow* InDestroyer)
 {
@@ -159,6 +159,7 @@ void UCDoAction_Bow::Tick(float InDeltaTime)
 
 }
 
+//일반 활 물리 공격 시 작동
 void UCDoAction_Bow::OnAttachmentBeginOverlap(ACharacter* InAttacker, AActor* InAttackCauser, ACharacter* InOther, const FHitResult& SweepResult, UPrimitiveComponent* OverlapComponent)
 {
 	Super::OnAttachmentBeginOverlap(InAttacker, InAttackCauser, InOther, SweepResult, OverlapComponent);
@@ -197,9 +198,9 @@ void UCDoAction_Bow::CreateArrow()
 
 	FAttachmentTransformRules rule = FAttachmentTransformRules(EAttachmentRule::KeepRelative, true);
 	arrow->AttachToComponent(OwnerCharacter->GetMesh(), rule, "Hand_Bow_Right_Arrow");
-	
 
 	Arrows.Add(arrow);
+
 	//스폰 액터 디퍼드를 최종 스폰하려면 아래를 사용해야한다.
 	//액터 생명주기 참고
 	UGameplayStatics::FinishSpawningActor(arrow, transform);
@@ -214,8 +215,6 @@ ACArrow* UCDoAction_Bow::GetAttachedArrow()
 		if (arrow->IsShoot() == false)
 			return arrow;
 	}
-
-	
 	return nullptr;
 }
 

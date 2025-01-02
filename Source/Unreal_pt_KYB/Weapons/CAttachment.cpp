@@ -13,7 +13,7 @@ ACAttachment::ACAttachment()
 }
 
 
-//블루브린트에서 비긴시 콜해지게 만든다.
+//블루브린트에서 비긴시 콜
 void ACAttachment::AttachTo(FName InSocketName)
 {
 	AttachToComponent(OwnerCharacter->GetMesh(), FAttachmentTransformRules(EAttachmentRule::KeepRelative,true), InSocketName);
@@ -71,6 +71,8 @@ void ACAttachment::Tick(float DeltaSeconds)
 
 }
 
+//콜리전 검사의 불확실성을 해결하고자 제작
+//모양은 콜리전의 모양을 가져다가 트레이스 검사 시작
 void ACAttachment::OnWeaponSweepTraceOverlap()
 {
 	if (bSweepOn == false)
@@ -136,13 +138,14 @@ void ACAttachment::OnWeaponSweepTraceOverlap()
 }
 
 
-
+//필요시 콜리전 이름으로 활성화 가능
 void ACAttachment::OnCollision(FName InName)
 {
 	if (InName.IsNone())
 	{
 		for (UShapeComponent* Collision : Collisions)
 		{
+			//NormalAttack은 기본 공격 콜리전
 			if (Collision->GetName() == "NormalAttack")
 			{
 				Collision->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
@@ -221,8 +224,10 @@ void ACAttachment::OffSweepTrace(FName InName)
 	CurrentSweepTraceCollision = nullptr;
 }
 
+//무기 오버랩 시 동작 로직
 void ACAttachment::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+	//프랙처 오브젝츠 파괴
 	ACDestructibleObject* DestructibleObject = Cast<ACDestructibleObject>(OtherActor);
 	if (DestructibleObject != nullptr)
 	{
@@ -240,9 +245,6 @@ void ACAttachment::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedCompon
 	if (OwnerTeamAgent->GetGenericTeamId() == OtherTeamAgent->GetGenericTeamId())
 		return;
 
-
-	
-	
 	if (OnAttachmentBeginOverlap.IsBound())
 	{
 		OnAttachmentBeginOverlap.Broadcast(OwnerCharacter,this,Cast<ACharacter>(OtherActor), SweepResult, OverlappedComponent);
@@ -258,8 +260,6 @@ void ACAttachment::OnComponentEndOverlap(UPrimitiveComponent* OverlappedComponen
 
 	if (OnAttachmentEndOverlap.IsBound())
 		OnAttachmentEndOverlap.Broadcast(OwnerCharacter, Cast<ACharacter>(OtherActor));
-
-
 }
 
 
