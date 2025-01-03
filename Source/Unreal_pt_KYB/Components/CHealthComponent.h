@@ -7,6 +7,14 @@
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FHPDelegate, float, RemainHP, float, DamageAmount, float, MaxHP);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FMPDelegate, float, RemainMP, float, UseMPAmount, float, MaxMP);
 
+/*------------------------------------------------------------------------
+
+  @ 이  름: UCHealthComponent
+  @ 설  명: 기본 체력과 마나를 관리하는 컴포넌트
+  @ 콜루트: Damage->HealthComponent, HealthComponent -> UI
+  @ TODO:
+
+------------------------------------------------------------------------*/
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class UNREAL_PT_KYB_API UCHealthComponent : public UActorComponent
 {

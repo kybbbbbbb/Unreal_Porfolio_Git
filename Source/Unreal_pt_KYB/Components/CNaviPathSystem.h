@@ -8,6 +8,14 @@
 
 class USplineComponent;
 
+/*------------------------------------------------------------------------
+
+  @ 이  름: UCNaviPathSystem
+  @ 설  명: 네비게이션 기능을 가진 컴포넌트
+  @ 콜루트: Player-> Press N -> UCNaviPathSystem On
+  @ TODO:
+
+------------------------------------------------------------------------*/
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class UNREAL_PT_KYB_API UCNaviPathSystem : public UActorComponent
 {
@@ -24,6 +32,7 @@ public:
 	void PlayNavigation(FVector targetLocation);
 	void NaviOn();
 	FORCEINLINE void SetTargetLocation(FVector Location) { targetLocation = Location; }
+
 private:
 	ACharacter* owner;
 
@@ -33,7 +42,6 @@ private:
 	FPathFindingQuery Query;
 
 	void OnPathFoundAsync(uint32 QueryID, ENavigationQueryResult::Type Result, FNavPathSharedPtr Path);
-	//void OnFindPathToLocationSynchronously(FVector targetLocation);
 	void EndNav();
 
 	FVector targetLocation = FVector::ZeroVector;
@@ -43,6 +51,7 @@ private:
 public:
 	UPROPERTY(EditAnywhere)
 	UStaticMesh* SplineMeshAsset;
+
 	UPROPERTY(EditAnywhere)
 	UMaterialInstance* SplineMeshMaterial;
 		

@@ -9,12 +9,16 @@ enum class EStateType : uint8
 	Idle =0, Evade, Equip, Damaged, Action, Dead, Parring, Stun,  Max
 };
 
-//코드 결합도를 낮추기위한 델리게이트 사용, 느슨한 결합
-//내부 타입이 변경되면 연결된 외부 함수들이 모두 호출되게 제작
-//다이나믹(직렬화,블프에서 바인드 가능), 멀티캐스트(함수를 여러개 받을 수 있음)
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FStateTypeChanged, EStateType, PrevType, EStateType, NewType);
 
+/*------------------------------------------------------------------------
 
+  @ 이  름: UCStateComponent
+  @ 설  명: 캐릭터의 상태를 가지고 있는 컴포넌트, 델리게이트로 상태변경 시 브로드캐스트
+  @ 콜루트: Player-> UCStateComponent
+  @ TODO:
+
+------------------------------------------------------------------------*/
 UCLASS()
 class UNREAL_PT_KYB_API UCStateComponent : public UActorComponent
 {

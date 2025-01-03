@@ -6,8 +6,6 @@
 #include "CWeaponComponent_reset.generated.h"
 
 
-
-
 UENUM(BlueprintType)
 enum class EWeaponType : uint8
 {
@@ -18,7 +16,14 @@ DECLARE_DYNAMIC_DELEGATE_TwoParams(FCheckStateType, EStateType, InType, bool&, r
 DECLARE_DYNAMIC_DELEGATE_OneParam(FCheckSubAction, bool&, InType);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FWeaponTypeChanged, int8, InWeaponTypeNum);
 
+/*------------------------------------------------------------------------
 
+  @ 이  름: UCWeaponComponent_reset
+  @ 설  명: 기존 WeaponComponent 오류로 새로 만든 컴포넌트, 모든 무기 기능은 여기서 호출됨
+  @ 콜루트: Player-> WeaponComponent
+  @ TODO:
+
+------------------------------------------------------------------------*/
 UCLASS()
 class UNREAL_PT_KYB_API UCWeaponComponent_reset : public UActorComponent
 {

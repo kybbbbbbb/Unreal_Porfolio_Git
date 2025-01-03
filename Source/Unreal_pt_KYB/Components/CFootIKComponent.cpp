@@ -104,11 +104,10 @@ void UCFootIKComponent::FootTrace()
 
 void UCFootIKComponent::SendAnimBluprint()
 {
-	
 	AnimBP->SetLFootIK(LFootIKoffset, RFootIKoffset, pelvisIKoffset, LFootIKRotator, RFootIKRotator);
-	
 }
 
+//받은 월드의 노말 회전 값을 캐릭터의 발 소켓 기준으로 변경, 즉, 월드 회전 -> 로컬 회전
 FRotator UCFootIKComponent::NormalToRotator(FVector NormalVector, FName boneName)
 {
 	FTransform BoneTransform = Skeletal->GetSocketTransform(boneName, ERelativeTransformSpace::RTS_World);
@@ -120,7 +119,6 @@ FRotator UCFootIKComponent::NormalToRotator(FVector NormalVector, FName boneName
     float Pitch = -UKismetMathLibrary::DegAtan2(LocalNormal.X, LocalNormal.Z);
 
     FRotator pResult = FRotator(Pitch, 0.0f, Roll);
-
 
 	return pResult;
 }

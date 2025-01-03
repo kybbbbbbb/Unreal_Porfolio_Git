@@ -112,7 +112,7 @@ void UCWeaponComponent_reset::SetWeaponOnVisible()
 void UCWeaponComponent_reset::SetSwordMode()
 {
 	bool bSameType = false;
-	//반드시 아이들 상태에서만 무기 변경이 가능하게 확인한다.
+	//반드시 아이들 상태에서만 무기 변경이 가능하게 확인
 	IsSameStateType_Delegate.ExecuteIfBound(EStateType::Idle, bSameType);
 
 
@@ -124,7 +124,7 @@ void UCWeaponComponent_reset::SetSwordMode()
 void UCWeaponComponent_reset::SetFistMode()
 {
 	bool bSameType = false;
-	//반드시 아이들 상태에서만 무기 변경이 가능하게 확인한다.
+	//반드시 아이들 상태에서만 무기 변경이 가능하게 확인
 	IsSameStateType_Delegate.ExecuteIfBound(EStateType::Idle, bSameType);
 
 
@@ -136,7 +136,7 @@ void UCWeaponComponent_reset::SetFistMode()
 void UCWeaponComponent_reset::SetUnarmedMode()
 {
 	bool bSameType = false;
-	//반드시 아이들 상태에서만 무기 변경이 가능하게 확인한다.
+	//반드시 아이들 상태에서만 무기 변경이 가능하게 확인
 	IsSameStateType_Delegate.ExecuteIfBound(EStateType::Idle, bSameType);
 	ChangeType(EWeaponType::Max);
 	
@@ -145,7 +145,7 @@ void UCWeaponComponent_reset::SetUnarmedMode()
 void UCWeaponComponent_reset::SetBowMode()
 {
 	bool bSameType = false;
-	//반드시 아이들 상태에서만 무기 변경이 가능하게 확인한다.
+	//반드시 아이들 상태에서만 무기 변경이 가능하게 확인
 	IsSameStateType_Delegate.ExecuteIfBound(EStateType::Idle, bSameType);
 
 	if (bSameType == true)
@@ -162,8 +162,6 @@ void UCWeaponComponent_reset::DoAction()
 	if (GetDoAction() == nullptr)
 		return;
 	GetDoAction()->DoAction();
-
-
 }
 
 
@@ -246,10 +244,6 @@ void UCWeaponComponent_reset::SubAction_Parrying(AController* InEventInstigator)
 			return;
 		}
 	}
-
-
-
-
 }
 
 
@@ -326,7 +320,6 @@ void UCWeaponComponent_reset::TickComponent(float DeltaTime, ELevelTick TickType
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-
 	if (!!GetDoAction())
 		GetDoAction()->Tick(DeltaTime);
 
@@ -335,7 +328,6 @@ void UCWeaponComponent_reset::TickComponent(float DeltaTime, ELevelTick TickType
 		TArray<UCSubAction_RightMouse*>* subaction = GetSubAction();
 		for (int32 i = 0; i < subaction->Num(); i++)
 		{
-
 			(*subaction)[i]->Tick(DeltaTime);
 		}
 	}

@@ -10,7 +10,14 @@ enum class ESpeedType : uint8
 	Walk = 0, WeaponSpeed, Run, Sprint, Max,
 };
 
+/*------------------------------------------------------------------------
 
+  @ 이  름: UCMovementComponent
+  @ 설  명: 기본 이동 기능을 가진 컴포넌트
+  @ 콜루트: Player-> InputBinding -> UCMovementComponent
+  @ TODO:
+
+------------------------------------------------------------------------*/
 UCLASS()
 class UNREAL_PT_KYB_API UCMovementComponent : public UActorComponent
 {
@@ -42,7 +49,6 @@ public:
 	void OnRun();
 	
 	void OnWalk();
-	//void OnJump();
 
 	void OnMoveForward(float InAxis);
 	void OnMoveRight(float InAxis);

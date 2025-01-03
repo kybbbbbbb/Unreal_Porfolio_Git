@@ -20,8 +20,6 @@ UCStateComponent::UCStateComponent()
 void UCStateComponent::BeginPlay()
 {
 	Super::BeginPlay();
-
-	
 }
 
 void UCStateComponent::SetIdleMode()

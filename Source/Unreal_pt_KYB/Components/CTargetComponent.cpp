@@ -66,13 +66,10 @@ void UCTargetComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 		return;
 	}
 
-
 	FRotator targetRotation = FRotator(controlRotation.Pitch, ownerToTarget.Yaw, ownerToTarget.Roll);
 	FRotator result = UKismetMathLibrary::RInterpTo(controlRotation, targetRotation, DeltaTime, 10.0f);
 
 	controller->SetControlRotation(result);
-
-
 }
 
 void UCTargetComponent::Toggle()
@@ -83,7 +80,6 @@ void UCTargetComponent::Toggle()
 		return;
 	}
 	End();
-
 }
 
 
@@ -123,27 +119,19 @@ void UCTargetComponent::Change(ACharacter* InCandidate)
 		return;
 	}
 
-	//if (IsValid(Particle))
-	//{
-
-	//	Particle->DestroyComponent();
-	//	Particle = nullptr;
-	//}
-
 	if (InCandidate != nullptr)
 	{
-		//Particle = UGameplayStatics::SpawnEmitterAttached(particleAsset, InCandidate->GetMesh(), "Root", FVector(0, 0, -10), FRotator::ZeroRotator, EAttachLocation::KeepRelativeOffset);
 		Target = InCandidate;
-
 	}
 	bExistTarget = true;
-
 }
 
+//플레이어의 정면에서 가까운 액터 찾는 함수
 ACharacter* UCTargetComponent::GetNealyFrontAngle(const TArray<FHitResult>& InHitResult)
 {
 	float angle = 0.0f;
 	ACharacter* candidate = nullptr;
+
 	for (const FHitResult& result : InHitResult)
 	{
 		if (result.GetActor() == nullptr)
@@ -154,6 +142,7 @@ ACharacter* UCTargetComponent::GetNealyFrontAngle(const TArray<FHitResult>& InHi
 			continue;
 		if (State->IsDeadMode() == true)
 			continue;
+
 		ACMonsters_AI* monster = Cast<ACMonsters_AI>(result.GetActor());
 		if (monster == nullptr)
 			continue;
@@ -183,7 +172,5 @@ void UCTargetComponent::End()
 {
 	Target = nullptr;
 	bExistTarget = false;
-	//if (!!Particle)
-	//	Particle->DestroyComponent();
 }
 

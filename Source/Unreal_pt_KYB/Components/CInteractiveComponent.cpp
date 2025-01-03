@@ -4,7 +4,6 @@
 
 UCInteractiveComponent::UCInteractiveComponent()
 {
-	
 	PrimaryComponentTick.bCanEverTick = true;
 }
 
@@ -15,7 +14,6 @@ void UCInteractiveComponent::BeginPlay()
 
 	OwnerCharacter = Cast<ACharacter>(GetOwner());
 	PlayerController = OwnerCharacter->GetController<APlayerController>();
-	
 }
 
 
@@ -26,7 +24,6 @@ void UCInteractiveComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 	if (!PlayerController) return;
 
 	FVector2D ScreenLocation(GEngine->GameViewport->Viewport->GetSizeXY() / 2);
-
 
 	FVector WorldLocation, WorldDirection;
 	PlayerController->DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, WorldLocation, WorldDirection);
@@ -103,7 +100,6 @@ void UCInteractiveComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 void UCInteractiveComponent::IsRiding(bool Inbool)
 {
 	isRiding = Inbool;
-
 }
 
 void UCInteractiveComponent::CheckInteractive()

@@ -5,7 +5,14 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "CTargetComponent.generated.h"
 
+/*------------------------------------------------------------------------
 
+  @ 이  름: UCTargetComponent
+  @ 설  명: 타겟팅 기능이 있는 컴폰넌트
+  @ 콜루트: Player-> Press T -> TargetComponent On
+  @ TODO:
+
+------------------------------------------------------------------------*/
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class UNREAL_PT_KYB_API UCTargetComponent : public UActorComponent
 {
@@ -24,7 +31,6 @@ public:
 private:
 	class ACharacter* OwnerCharacter;
 	class ACharacter* Target;
-	//class UParticleSystemComponent* Particle;
 	class UWidgetComponent* TargetUI;
 
 public:

@@ -60,7 +60,6 @@ public:
 	void PlayFootstep(const FName& SurfaceType);
 	void PlayBGM(const FName& SoundName, UWorld* InWorld);
 
-	void SetVolume(const FName& Category, float Volume);
 	float GetVolume(const FName& Category);
 
 public:

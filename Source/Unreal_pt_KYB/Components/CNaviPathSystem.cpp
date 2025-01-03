@@ -229,6 +229,18 @@ void UCNaviPathSystem::OnPathFoundAsync(uint32 QueryID, ENavigationQueryResult::
 }
 
 
+void UCNaviPathSystem::EndNav()
+{
+	SplineComponent->ClearSplinePoints();
+	for (USplineMeshComponent* mesh : SplineMesh)
+	{
+		if (mesh)
+		{
+			mesh->DestroyComponent();
+		}
+	}
+	SplineMesh.Empty();
+}
 
 
 //동기로 길찾기 구현
@@ -276,18 +288,7 @@ void UCNaviPathSystem::OnPathFoundAsync(uint32 QueryID, ENavigationQueryResult::
 //
 //}
 
-void UCNaviPathSystem::EndNav()
-{
-	SplineComponent->ClearSplinePoints();
-	for (USplineMeshComponent* mesh : SplineMesh)
-	{
-		if (mesh)
-		{
-			mesh->DestroyComponent();
-		}
-	}
-	SplineMesh.Empty();
-}
+
 
 
 

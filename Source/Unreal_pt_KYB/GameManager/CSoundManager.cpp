@@ -11,9 +11,6 @@ UCSoundManager::UCSoundManager()
 	{
 		SoundDataTable = DT_SoundData;
 	}
-
-
-
 }
 
 UCSoundManager* UCSoundManager::GetInstance()
@@ -23,7 +20,6 @@ UCSoundManager* UCSoundManager::GetInstance()
 		Instance = NewObject<UCSoundManager>();
 		Instance->AddToRoot();
 		Instance->LoadSounds();
-		
 	}
 	return Instance;
 }
@@ -86,7 +82,6 @@ void UCSoundManager::PlayFootstep(const FName& SurfaceType)
 	{
 		UGameplayStatics::PlaySound2D(GetWorld(), Sound, CategoryMap.FindRef("Footstep"));
 	}
-
 }
 
 void UCSoundManager::PlayBGM(const FName& SoundName, UWorld* InWorld)
@@ -112,12 +107,6 @@ void UCSoundManager::PlayBGM(const FName& SoundName, UWorld* InWorld)
 	}
 }
 
-void UCSoundManager::SetVolume(const FName& Category, float Volume)
-{
-
-
-}
-
 float UCSoundManager::GetVolume(const FName& Category)
 {
 	return 0.0f;
@@ -135,8 +124,6 @@ void UCSoundManager::LoadSounds()
 		//키는 데이터테이블 이름
 		FName SoundName = It.Key;
 		FSoundData* SoundData = (FSoundData*)It.Value;
-
-
 
 		if (SoundData->SoundCue.IsNull() == false)
 		{
@@ -157,6 +144,7 @@ void UCSoundManager::LoadSounds()
 
 }
 
+//Uobject 싱글톤 삭제 함수, 포인터 형 변수는 모두 여기서 널화
 void UCSoundManager::ShutDown()
 {
 	if (Instance)

@@ -4,6 +4,8 @@
 #include "Blueprint/UserWidget.h"
 #include "CUserWidget_Menu.generated.h"
 
+//사용X클래스
+//TODO: 추후 삭제
 UCLASS()
 class UNREAL_PT_KYB_API UCUserWidget_Menu : public UUserWidget
 {

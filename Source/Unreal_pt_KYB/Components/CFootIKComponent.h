@@ -5,7 +5,14 @@
 #include "../Characters/CAnimInstance.h"
 #include "CFootIKComponent.generated.h"
 
+/*------------------------------------------------------------------------
 
+  @ 이  름: UCFootIKComponent
+  @ 설  명: Foot IK 기능을 가진 컴포넌트, 발 위치, 회전 각을 애님BP에 전달하는 역할
+  @ 콜루트: 
+  @ TODO:
+
+------------------------------------------------------------------------*/
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class UNREAL_PT_KYB_API UCFootIKComponent : public UActorComponent
 {
