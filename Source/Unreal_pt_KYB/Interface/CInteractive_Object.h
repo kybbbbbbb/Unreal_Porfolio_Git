@@ -1,11 +1,18 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "CInteractableObject.h"
 #include "CInteractive_Object.generated.h"
+
+/*------------------------------------------------------------------------
+
+  @ 이  름: ACInteractive_Object
+  @ 설  명: 상호작용 가능한 오브젝트 제작 시 사용
+  @ 콜루트:
+  @ TODO: 
+
+------------------------------------------------------------------------*/
 
 UCLASS()
 class UNREAL_PT_KYB_API ACInteractive_Object : public AActor, public ICInteractableObject

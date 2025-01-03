@@ -6,6 +6,15 @@
 #include "../GameManager/CQuestData.h"
 #include "CInteractive_NPC.generated.h"
 
+/*------------------------------------------------------------------------
+
+  @ 이  름: ACInteractive_NPC
+  @ 설  명: 상호작용 가능한 NPC 제작 시 사용
+  @ 콜루트:
+  @ TODO:
+
+------------------------------------------------------------------------*/
+
 UCLASS()
 class UNREAL_PT_KYB_API ACInteractive_NPC : public AActor , public ICInteractableObject
 {

@@ -21,6 +21,14 @@ public:
 	FName Category;  // "SFX", "BGM", "Footstep" 등
 };
 
+/*------------------------------------------------------------------------
+
+  @ 이  름: UCSoundManager
+  @ 설  명: 싱글톤 사운드 매니저, 
+  @ 콜루트:
+  @ TODO:
+
+------------------------------------------------------------------------*/
 UCLASS()
 class UNREAL_PT_KYB_API UCSoundManager : public UObject
 {
@@ -39,11 +47,13 @@ private:
 
 	UPROPERTY()
 	TMap<FName, float> CategoryMap;
+
 	UPROPERTY()
 	UAudioComponent* BGMComponent = nullptr;
 
 public:
 	static UCSoundManager* GetInstance();
+	static void ShutDown();
 
 	void PlaySound2D(const FName& SoundName, UWorld* InWorld);
 	void PlaySound3D(const FName& SoundName, const FVector& Location, UWorld* InWorld);
@@ -55,8 +65,4 @@ public:
 
 public:
 	void LoadSounds(); 
-
-public:
-	static void ShutDown();
-
 };

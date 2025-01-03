@@ -6,6 +6,15 @@
 #include "CPortionItemData.h"
 #include "CDestructibleObject.generated.h"
 
+/*------------------------------------------------------------------------
+
+  @ 이  름: ACDestructibleObject
+  @ 설  명: 부숴지는 오브젝트, 일정 데미지 이상 받으면 부숴짐
+  @ 콜루트:
+  @ TODO: 지오메트리 컬렉션의 슬립과 웨이크업을 다시 조정해야할 듯
+
+------------------------------------------------------------------------*/
+
 UCLASS()
 class UNREAL_PT_KYB_API ACDestructibleObject : public AActor
 {

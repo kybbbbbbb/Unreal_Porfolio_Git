@@ -45,7 +45,14 @@ public:
 
 
 
+/*------------------------------------------------------------------------
 
+  @ 이  름: UCQuestData
+  @ 설  명: 퀘스트 데이터 저장용 UObject 클래스
+  @ 콜루트:
+  @ TODO:
+
+------------------------------------------------------------------------*/
 UCLASS(Blueprintable)
 class UNREAL_PT_KYB_API UCQuestData : public UObject
 {

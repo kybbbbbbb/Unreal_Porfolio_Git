@@ -7,8 +7,6 @@ UInventorySystem::UInventorySystem()
 {
 }
 
-
-
 void UInventorySystem::AddItem(FPrimaryAssetId itemID)
 {
 	items.Add(itemID);
@@ -22,7 +20,6 @@ void UInventorySystem::AddItem(FPrimaryAssetId itemID)
 void UInventorySystem::Beginplay()
 {
 	//특정 폴더에 아이템을 몰아두고 데이터 가져옴
-	//
 	FAssetRegistryModule* AssetRegistryModule = FModuleManager::LoadModulePtr<FAssetRegistryModule>("AssetRegistry");
 
 	if (AssetRegistryModule)

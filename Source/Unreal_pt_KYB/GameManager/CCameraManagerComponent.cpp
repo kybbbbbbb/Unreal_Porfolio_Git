@@ -8,7 +8,6 @@
 UCCameraManagerComponent::UCCameraManagerComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
-
 }
 
 
@@ -178,9 +177,6 @@ void UCCameraManagerComponent::BeginPlay()
 		DefaultUpDownFix.ReturnTransitionSpeed = 5.0f;
 		CameraPresets.Add(ECameraEnum::DefaultUpDownFix, DefaultUpDownFix);
 	}
-
-
-
 }
 
 
@@ -237,11 +233,7 @@ void UCCameraManagerComponent::TickComponent(float DeltaTime, ELevelTick TickTyp
 			DeltaTime,
 			CurrentPreset.TransitionSpeed
 		));
-
-
 	}
-
-
 }
 
 
@@ -309,10 +301,7 @@ void UCCameraManagerComponent::OnSwordAttack()
 
 void UCCameraManagerComponent::OnBowAttack()
 {
-
 }
-
-
 
 void UCCameraManagerComponent::DefaultCameraChange(ECameraEnum InCameraNum)
 {
@@ -414,8 +403,6 @@ void UCCameraManagerComponent::SetCameraState(ECameraEnum NewState, float Custom
 			OwnerCharacter->bUseControllerRotationYaw = false;
 			OwnerCharacter->GetCharacterMovement()->bOrientRotationToMovement = false;
 		}
-		
-
 
 		float Duration = CustomDuration > 0.0f ? CustomDuration : DefaultTransitionDuration;
 		GetWorld()->GetTimerManager().SetTimer(
@@ -430,7 +417,6 @@ void UCCameraManagerComponent::SetCameraState(ECameraEnum NewState, float Custom
 	}
 	else
 	{
-
 		if (MovementComponent)
 		{
 			MovementComponent->SetFixedCamera(false);

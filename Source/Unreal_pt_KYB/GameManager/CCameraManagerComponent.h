@@ -56,6 +56,14 @@ public:
 	bool bfixedCamera = false;
 };
 
+/*------------------------------------------------------------------------
+
+  @ 이  름: UCCameraManagerComponent
+  @ 설  명: 카메라를 다루는 컴포넌트, 피격, 공격, 스킬 등
+  @ 콜루트:
+  @ TODO:
+
+------------------------------------------------------------------------*/
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class UNREAL_PT_KYB_API UCCameraManagerComponent : public UActorComponent
 {

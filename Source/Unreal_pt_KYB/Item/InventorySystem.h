@@ -31,6 +31,4 @@ private:
 	TArray<FPrimaryAssetId> items;
 	UPROPERTY(EditAnywhere)
 	TArray<UCItemDataAsset*> ItemDataAssets;
-
-	
 };

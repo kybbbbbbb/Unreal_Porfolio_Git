@@ -26,10 +26,16 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = Portion)
 	TSubclassOf<class ACPortion> portionBP;
-
-
 };
 
+/*------------------------------------------------------------------------
+
+  @ 이  름: UCPortionItemData
+  @ 설  명: 포션아이템의 데이터가 들어있는 데이터 에셋
+  @ 콜루트:
+  @ TODO: 
+
+------------------------------------------------------------------------*/
 
 UCLASS()
 class UNREAL_PT_KYB_API UCPortionItemData : public UCItemDataAsset

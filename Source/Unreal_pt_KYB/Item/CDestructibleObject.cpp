@@ -72,6 +72,7 @@ void ACDestructibleObject::BreakObject(FVector HitLocation, FVector ImpulseDir)
 	ChangeColor();
 }
 
+//아이템 생성
 void ACDestructibleObject::DropItem()
 {
 	if (DropPortionItem.Num() > 0)
