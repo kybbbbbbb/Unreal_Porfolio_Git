@@ -13,7 +13,7 @@ public class Unreal_pt_KYB : ModuleRules
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "GameplayCameras", "GameplayTasks", "NavigationSystem", "Niagara", "UMG", "AssetRegistry", "GeometryCollectionEngine" });
 
 
-		PrivateDependencyModuleNames.AddRange(new string[] {  });
+		PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore", "UnrealEd", "LevelEditor"  });
 
 	}
 }
