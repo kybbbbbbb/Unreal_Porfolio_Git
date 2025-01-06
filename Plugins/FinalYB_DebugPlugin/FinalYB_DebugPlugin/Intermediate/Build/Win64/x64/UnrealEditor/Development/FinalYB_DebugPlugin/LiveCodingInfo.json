@@ -1,0 +1,9 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.FinalYB_DebugPlugin.cpp.obj": [
+			"DebugWidget_YB.cpp.obj",
+			"FinalYB_DebugPlugin.cpp.obj"
+		]
+	}
+}

@@ -10,10 +10,15 @@ public class Unreal_pt_KYB : ModuleRules
 	
 		PublicIncludePaths.Add(ModuleDirectory);
 		
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "GameplayCameras", "GameplayTasks", "NavigationSystem", "Niagara", "UMG", "AssetRegistry", "GeometryCollectionEngine" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "GameplayCameras", "GameplayTasks", "NavigationSystem", "Niagara", "UMG", "AssetRegistry", "GeometryCollectionEngine",               "Core",
+                "Slate",
+                "SlateCore",
+                "EditorStyle",
+                "UnrealEd",
+                "LevelEditor" });
 
 
-		PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore", "UnrealEd", "LevelEditor"  });
+		PrivateDependencyModuleNames.AddRange(new string[] {   });
 
 	}
 }
