@@ -5,6 +5,14 @@
 #include "../Components/CWeaponComponent_reset.h"
 #include "CAnimInstance.generated.h"
 
+/*------------------------------------------------------------------------
+
+  @ 이  름: UCAnimInstance
+  @ 설  명: 플레이어의 애니메이션 재생을 위한 애님인스턴스클래스
+  @ 콜루트:
+  @ TODO:
+
+------------------------------------------------------------------------*/
 UCLASS()
 class UNREAL_PT_KYB_API UCAnimInstance : public UAnimInstance
 {
@@ -69,8 +77,6 @@ public:
 	void SetRiderVertical(float infloat);
 	void SetRiderHorizontal(float infloat);
 
-	//void OnJump();
-	//void OffJump();
 	FORCEINLINE void SetLFootIK(float LFLocation, float RFLocation, float pelvis, FRotator LFootRotation, FRotator RFootRotation)
 	{
 		LFootIKlocation = LFLocation;

@@ -7,6 +7,14 @@
 #include "../Item/CWeaponItemData.h"
 #include "CMonsters_AI.generated.h"
 
+/*------------------------------------------------------------------------
+
+  @ 이  름: ACMonsters_AI
+  @ 설  명: 몬스터의 AI관련 로직을 수행하기 위한 자식클래스, 이걸로 액터 제작 필요
+  @ 콜루트:
+  @ TODO:
+
+------------------------------------------------------------------------*/
 UCLASS()
 class UNREAL_PT_KYB_API ACMonsters_AI : public ACMonsters, public IGenericTeamAgentInterface
 {

@@ -8,7 +8,14 @@
 
 class ACHorse;
 class UCSoundManager;
+/*------------------------------------------------------------------------
 
+  @ 이  름: ACPlayer
+  @ 설  명: 플레이어 캐릭터 액터, 팀아이디를 가지고 있고 모든 인풋이 들어온다.
+  @ 콜루트:
+  @ TODO:
+
+------------------------------------------------------------------------*/
 UCLASS()
 class UNREAL_PT_KYB_API ACPlayer : public ACharacter, public IGenericTeamAgentInterface, public IIDeadable
 {
@@ -26,7 +33,7 @@ private:
 	int32 CurrentAttackToken = 0;
 
 protected:
-	//디버깅용
+	//UI매니저 틱 호출 용
 	virtual void Tick(float DeltaTime) override;
 
 public:
@@ -172,7 +179,6 @@ private:
 
 	void Damage();
 	void Dead();
-	//void ignoreDamage();
 
 	bool IsRiding = false;
 
@@ -210,6 +216,7 @@ public:
 	void OnStateTypeChange(EStateType PrevType, EStateType NewType);
 
 private:
+	//데미지 전달을 위한 이벤트 구조체
 	struct FDamageData
 	{
 		float Power;

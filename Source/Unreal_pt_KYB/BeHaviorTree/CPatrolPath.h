@@ -4,6 +4,14 @@
 #include "GameFramework/Actor.h"
 #include "CPatrolPath.generated.h"
 
+/*------------------------------------------------------------------------
+
+  @ 이  름: ACPatrolPath
+  @ 설  명: AI에서 참조하는 패트롤 기능, 위치 찾아 반환, 루프 등
+  @ 콜루트:
+  @ TODO:
+
+------------------------------------------------------------------------*/
 UCLASS()
 class UNREAL_PT_KYB_API ACPatrolPath : public AActor
 {

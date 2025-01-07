@@ -7,6 +7,14 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnMonsterDead);
 
+/*------------------------------------------------------------------------
+
+  @ 이  름: ACMonsters
+  @ 설  명: 몬스터 부모 액터 클래스, 기본 상태를 지님
+  @ 콜루트:
+  @ TODO:
+
+------------------------------------------------------------------------*/
 UCLASS()
 class UNREAL_PT_KYB_API ACMonsters : public ACharacter, public IIDeadable
 {

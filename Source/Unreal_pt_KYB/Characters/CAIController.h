@@ -29,6 +29,14 @@ struct FSightConfig
 	bool bDetectFriendlies;
 };
 
+/*------------------------------------------------------------------------
+
+  @ 이  름: ACAIController
+  @ 설  명: AI는 공통적으로 가지게 되는 AI컨트롤러.
+  @ 콜루트:
+  @ TODO:
+
+------------------------------------------------------------------------*/
 UCLASS()
 class UNREAL_PT_KYB_API ACAIController : public AAIController
 {

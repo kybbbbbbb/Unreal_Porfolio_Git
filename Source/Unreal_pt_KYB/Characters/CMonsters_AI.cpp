@@ -46,7 +46,6 @@ void ACMonsters_AI::ParringAction()
 		if (FMath::IsNearlyZero(neutralizeGage))
 		{
 			PlayAnimMontage(StunMontage);
-			//AIBehavior->SetStunMode();
 			StateComponent->SetStunMode();
 			
 		}
@@ -147,7 +146,7 @@ void ACMonsters_AI::Damage()
 				FVector Impulse = FVector(FMath::RandRange(-200.0f, 200.0f), FMath::RandRange(-200.0f, 200.0f), 1000.0f); // 랜덤한 방향으로 약간 튕기면서 위로 던짐
 				MeshComponent->AddImpulse(Impulse);
 
-				// 회전력(Torque) 추가하여 회전 효과
+				// 회전력 추가하여 회전 효과
 				FVector Torque = FVector(FMath::RandRange(-500.0f, 500.0f), FMath::RandRange(-500.0f, 500.0f), FMath::RandRange(-500.0f, 500.0f));
 				MeshComponent->AddTorqueInRadians(Torque, NAME_None, true);
 
@@ -270,6 +269,7 @@ void ACMonsters_AI::OnHealthPointChange(float RemainHP, float DamageAmount, floa
 }
 
 
+//몬스터 네임텍, 체력 등 위젯
 void ACMonsters_AI::Tick_LabelRenderScale()
 {
 	UUserWidget* label = Cast<UUserWidget>(WidgetComponent->GetUserWidgetObject());

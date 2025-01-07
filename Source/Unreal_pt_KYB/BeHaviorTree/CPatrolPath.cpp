@@ -5,6 +5,7 @@
 
 ACPatrolPath::ACPatrolPath()
 {
+	//에디터 모드에서만 디버깅 표시
 #if WITH_EDITOR
 	bRunConstructionScriptOnDrag = false;  
 #endif

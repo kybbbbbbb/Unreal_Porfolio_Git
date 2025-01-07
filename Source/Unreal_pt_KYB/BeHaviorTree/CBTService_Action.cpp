@@ -1,6 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "BeHaviorTree/CBTService_Action.h"
 
 UCBTService_Action::UCBTService_Action()

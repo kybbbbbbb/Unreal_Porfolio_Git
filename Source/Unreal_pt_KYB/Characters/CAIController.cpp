@@ -32,7 +32,7 @@ void ACAIController::BeginPlay()
 	Perception->OnPerceptionUpdated.AddDynamic(this, &ACAIController::OnPerceptionUpdate);
 }
 
-
+//컨트롤러 빙의 시점에 수행 함수
 void ACAIController::OnPossess(APawn* InPawn)
 {
 	Super::OnPossess(InPawn);
@@ -64,7 +64,7 @@ void ACAIController::OnUnPossess()
 }
 
 
-
+//감지 시스템 구현 함수
 void ACAIController::OnPerceptionUpdate(const TArray<AActor*>& UpdatedActors)
 {
 	if (AIBehavior->IsDeadMode())

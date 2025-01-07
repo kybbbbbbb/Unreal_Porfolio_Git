@@ -4,9 +4,6 @@
 #include "BehaviorTree/BTTaskNode.h"
 #include "CBTTaskNode_MoveToTarget.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class UNREAL_PT_KYB_API UCBTTaskNode_MoveToTarget : public UBTTaskNode
 {

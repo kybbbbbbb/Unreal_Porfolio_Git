@@ -97,7 +97,6 @@ void UCBTService_BossMonster::StartEvadeCooldown(float InAvoidTimer)
 
 void UCBTService_BossMonster::ResetEvade()
 {
-	// 쿨다운이 끝나면 다시 회피 가능 상태로 설정
 	bCanEvade = true;
 }
 

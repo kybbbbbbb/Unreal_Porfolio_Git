@@ -40,9 +40,6 @@ void UCBTService_Goblin::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* Node
 	if (target == nullptr)
 	{
 		beheivior->SetPatrolMode();
-		
-		//beheivior->TargetMisssing();
-		//beheivior->SetWaitMode();
 		return;
 	}
 
@@ -106,6 +103,5 @@ void UCBTService_Goblin::StartEvadeCooldown(float InAvoidTimer)
 
 void UCBTService_Goblin::ResetEvade()
 {
-	// 쿨다운이 끝나면 다시 회피 가능 상태로 설정
 	bCanEvade = true;
 }

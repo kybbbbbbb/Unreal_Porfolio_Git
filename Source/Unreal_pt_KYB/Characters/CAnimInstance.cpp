@@ -54,7 +54,6 @@ void UCAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 		FRotator TargetRotation = FMath::RInterpTo(CharacterRotation, CameraRotation, DeltaSeconds, 15.0f);
 		OwnerCharacter->SetActorRotation(TargetRotation);
 
-		//Calculate Direction using input
 		FVector CharacterForward = CameraRotation.Vector().GetSafeNormal2D();
 		FVector InputVector = OwnerCharacter->GetLastMovementInputVector().GetSafeNormal2D();
 		float DotProduct = FVector::DotProduct(CharacterForward, InputVector);
@@ -62,12 +61,8 @@ void UCAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 		float CrossProductZ = FVector::CrossProduct(CharacterForward, InputVector).Z;
 		float TargetDirection = FMath::Atan2(CrossProductZ, DotProduct) * (180.0f / PI);
 
-	
-		// Interpolate Direction
 		Direction = FMath::FInterpTo(Direction, TargetDirection, DeltaSeconds, 15.0f);
 	}
-
-
 }
 
 void UCAnimInstance::ChangedAiming(bool bInbool)
@@ -90,14 +85,3 @@ void UCAnimInstance::SetRiderHorizontal(float infloat)
 	Horizontal = infloat;
 }
 
-//void UCAnimInstance::OnJump()
-//{
-//	IsJump = true;
-//
-//}
-//
-//void UCAnimInstance::OffJump()
-//{
-//	IsJump = false;
-//
-//}

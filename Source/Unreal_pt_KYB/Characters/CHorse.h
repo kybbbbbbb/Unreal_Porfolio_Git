@@ -17,6 +17,14 @@ public:
 	FVector Socketoffset;
 };
 
+/*------------------------------------------------------------------------
+
+  @ 이  름: ACHorse
+  @ 설  명: 말에 탑승하기 위해 제작한 말 클래스, posses를 통해 빙의 가능
+  @ 콜루트:
+  @ TODO:
+
+------------------------------------------------------------------------*/
 
 UCLASS()
 class UNREAL_PT_KYB_API ACHorse : public ACharacter, public ICInteractableObject

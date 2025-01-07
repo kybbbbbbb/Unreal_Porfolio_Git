@@ -12,7 +12,14 @@ enum class EAIStateType : uint8
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FAIStateTypeChange, EAIStateType, InPrevType, EAIStateType, InNewType);
 
+/*------------------------------------------------------------------------
 
+  @ 이  름: UCAIBehaviorComponent
+  @ 설  명: AI행동 트리 컴포넌트, 블랙보드는 오너 캐릭터에서 호출 할 때 지정
+  @ 콜루트:
+  @ TODO:
+
+------------------------------------------------------------------------*/
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class UNREAL_PT_KYB_API UCAIBehaviorComponent : public UActorComponent
 {
