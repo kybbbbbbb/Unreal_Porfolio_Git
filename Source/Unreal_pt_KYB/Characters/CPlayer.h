@@ -165,6 +165,9 @@ private:
 	bool isOnSubAction = false;
 	bool bInDash_shift = false;
 	bool bPressW = false;
+
+	//UPROPERTY를 붙여야 가비지 콜렉션에서 알고 참조된것을 삭제하지 않음...
+	//현재는 일단 addtoroot로 해놓음
 	class UCUIManager_Game* UIManager = nullptr;
 
 	FTimerHandle DoubleTapTimerHandle;
