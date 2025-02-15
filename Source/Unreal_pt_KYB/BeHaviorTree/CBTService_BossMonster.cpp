@@ -16,7 +16,7 @@ UCBTService_BossMonster::UCBTService_BossMonster()
 void UCBTService_BossMonster::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
 {
 	Super::TickNode(OwnerComp, NodeMemory, DeltaSeconds);
-
+	check()
 	ACAIController* controller = Cast<ACAIController>(OwnerComp.GetOwner());
 	ACMonsters_AI* ai = Cast<ACMonsters_AI>(controller->GetPawn());
 	UCAIBehaviorComponent* beheivior = Cast<UCAIBehaviorComponent>(ai->GetComponentByClass(UCAIBehaviorComponent::StaticClass()));

@@ -210,7 +210,7 @@ public:
 
 public:
 	UFUNCTION(BlueprintCallable)
-	float TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser);
+	virtual float TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 
 	UFUNCTION()
 	void OnStateTypeChange(EStateType PrevType, EStateType NewType);

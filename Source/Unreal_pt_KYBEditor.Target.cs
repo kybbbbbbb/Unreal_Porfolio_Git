@@ -11,5 +11,6 @@ public class Unreal_pt_KYBEditorTarget : TargetRules
 		DefaultBuildSettings = BuildSettingsVersion.V5;
 		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_4;
 		ExtraModuleNames.Add("Unreal_pt_KYB");
+		
 	}
 }

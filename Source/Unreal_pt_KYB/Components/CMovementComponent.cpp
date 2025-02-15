@@ -38,6 +38,8 @@ void UCMovementComponent::WeaponEquipRunSpeed(bool InisEquip)
 		SetSpeed(ESpeedType::Run);
 }
 
+
+
 void UCMovementComponent::OnRun()
 {
 	if (isEquipWeapon == false)
