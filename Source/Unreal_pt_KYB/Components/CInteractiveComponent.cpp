@@ -47,8 +47,10 @@ void UCInteractiveComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 
 	AActor* hit = HitResult.GetActor();
 
+	//히트된 객체가 없을때
 	if(hit == nullptr)
 	{
+		//아웃라인
 		if (OnOutlineResult.Num() < 1)
 			return;
 
@@ -60,6 +62,7 @@ void UCInteractiveComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 		return;
 	}
 
+	//인터렉티브 오브젝트가 아닐 때의 로직
 	ICInteractableObject* object = Cast<ICInteractableObject>(hit);
 	if (object == nullptr)
 	{
@@ -115,13 +118,13 @@ void UCInteractiveComponent::CheckInteractive()
 	FVector WorldLocation, WorldDirection;
 	PlayerController->DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, WorldLocation, WorldDirection);
 
-	// ���� ����׿�
+	// 레이 디버그용
 	FVector Start = WorldLocation;
 	FVector End = Start + (WorldDirection * InteractionDistance);
 	//DrawDebugLine(GetWorld(), Start, End, FColor::Green, false, 1, 0, 1);
 
 
-	// ��Ʈ ����� ����ϴ�.
+	// 히트 결과를 얻습니다.
 	FHitResult HitResult;
 	FCollisionQueryParams Params;
 	Params.AddIgnoredActor(GetOwner());
