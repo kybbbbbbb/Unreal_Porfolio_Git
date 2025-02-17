@@ -76,22 +76,29 @@ void UCInteractiveComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 		OnOutlineResult.Empty();
 		return;
 	}
-
-
+	
+	//여기로 넘어온다면 인터렉티브 오브젝트가 존재함
+	
+	//히트된 객체의 프리미티브 컴포넌트를 가져옴
 	TArray<UPrimitiveComponent*> results;
 	hit->GetComponents(UPrimitiveComponent::StaticClass(), results);
 	
-
+	
 	if (results.Num() > 0)
 	{
+		//렌더 커스텀 뎁스를 활성화시켜 커스텀 뎁스 버퍼에 출력시킴
 		for (UPrimitiveComponent* result : results)
 		{
 			result->SetRenderCustomDepth(true);
+			
+			//해당 프리미티브 컴포넌트를 추가해둠(추후 관리를 위해)
 			OnOutlineResult.Add(result);
 		}
 	}
 	else
 	{
+		//프리미티브컴포넌트가 없다면 현재 담겨있는 프리미티브 컴포넌트들의
+		//SetRenderCustomDepth를 해제 시키고 삭제
 		for (UPrimitiveComponent* Outlinecomponents : OnOutlineResult)
 		{
 			Outlinecomponents->SetRenderCustomDepth(false);
