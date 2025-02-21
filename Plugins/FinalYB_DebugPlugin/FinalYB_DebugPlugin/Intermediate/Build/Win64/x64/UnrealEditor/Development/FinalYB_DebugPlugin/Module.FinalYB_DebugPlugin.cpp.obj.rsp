@@ -1,11 +1,11 @@
-"C:\Users\YB\Desktop\Unreal_Porfolio_Git\Plugins\FinalYB_DebugPlugin\FinalYB_DebugPlugin\Intermediate\Build\Win64\x64\UnrealEditor\Development\FinalYB_DebugPlugin\Module.FinalYB_DebugPlugin.cpp"
-/FI"C:\Users\YB\Desktop\Unreal_Porfolio_Git\Intermediate\Build\Win64\x64\Unreal_pt_KYBEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h"
-/FI"C:\Users\YB\Desktop\Unreal_Porfolio_Git\Plugins\FinalYB_DebugPlugin\FinalYB_DebugPlugin\Intermediate\Build\Win64\x64\UnrealEditor\Development\FinalYB_DebugPlugin\Definitions.FinalYB_DebugPlugin.h"
-/Yu"C:\Users\YB\Desktop\Unreal_Porfolio_Git\Intermediate\Build\Win64\x64\Unreal_pt_KYBEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h"
-/Fp"C:\Users\YB\Desktop\Unreal_Porfolio_Git\Intermediate\Build\Win64\x64\Unreal_pt_KYBEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h.pch"
-/Fo"C:\Users\YB\Desktop\Unreal_Porfolio_Git\Plugins\FinalYB_DebugPlugin\FinalYB_DebugPlugin\Intermediate\Build\Win64\x64\UnrealEditor\Development\FinalYB_DebugPlugin\Module.FinalYB_DebugPlugin.cpp.obj"
-/sourceDependencies "C:\Users\YB\Desktop\Unreal_Porfolio_Git\Plugins\FinalYB_DebugPlugin\FinalYB_DebugPlugin\Intermediate\Build\Win64\x64\UnrealEditor\Development\FinalYB_DebugPlugin\Module.FinalYB_DebugPlugin.cpp.dep.json"
-@"C:\Users\YB\Desktop\Unreal_Porfolio_Git\Plugins\FinalYB_DebugPlugin\FinalYB_DebugPlugin\Intermediate\Build\Win64\x64\UnrealEditor\Development\FinalYB_DebugPlugin\FinalYB_DebugPlugin.Shared.rsp"
+"C:\Users\user\Desktop\Unreal_Porfolio_Git\Plugins\FinalYB_DebugPlugin\FinalYB_DebugPlugin\Intermediate\Build\Win64\x64\UnrealEditor\Development\FinalYB_DebugPlugin\Module.FinalYB_DebugPlugin.cpp"
+/FI"C:\Users\user\Desktop\Unreal_Porfolio_Git\Intermediate\Build\Win64\x64\Unreal_pt_KYBEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h"
+/FI"C:\Users\user\Desktop\Unreal_Porfolio_Git\Plugins\FinalYB_DebugPlugin\FinalYB_DebugPlugin\Intermediate\Build\Win64\x64\UnrealEditor\Development\FinalYB_DebugPlugin\Definitions.FinalYB_DebugPlugin.h"
+/Yu"C:\Users\user\Desktop\Unreal_Porfolio_Git\Intermediate\Build\Win64\x64\Unreal_pt_KYBEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h"
+/Fp"C:\Users\user\Desktop\Unreal_Porfolio_Git\Intermediate\Build\Win64\x64\Unreal_pt_KYBEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h.pch"
+/Fo"C:\Users\user\Desktop\Unreal_Porfolio_Git\Plugins\FinalYB_DebugPlugin\FinalYB_DebugPlugin\Intermediate\Build\Win64\x64\UnrealEditor\Development\FinalYB_DebugPlugin\Module.FinalYB_DebugPlugin.cpp.obj"
+/sourceDependencies "C:\Users\user\Desktop\Unreal_Porfolio_Git\Plugins\FinalYB_DebugPlugin\FinalYB_DebugPlugin\Intermediate\Build\Win64\x64\UnrealEditor\Development\FinalYB_DebugPlugin\Module.FinalYB_DebugPlugin.cpp.dep.json"
+@"C:\Users\user\Desktop\Unreal_Porfolio_Git\Plugins\FinalYB_DebugPlugin\FinalYB_DebugPlugin\Intermediate\Build\Win64\x64\UnrealEditor\Development\FinalYB_DebugPlugin\FinalYB_DebugPlugin.Shared.rsp"
 /Zc:inline
 /nologo
 /Oi

@@ -6,7 +6,7 @@
 /NAME:"UnrealEditor-FinalYB_DebugPlugin.dll"
 /IGNORE:4221
 /NODEFAULTLIB
-"C:\Users\YB\Desktop\Unreal_Porfolio_Git\Intermediate\Build\Win64\x64\Unreal_pt_KYBEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h.obj"
-"C:\Users\YB\Desktop\Unreal_Porfolio_Git\Plugins\FinalYB_DebugPlugin\FinalYB_DebugPlugin\Intermediate\Build\Win64\x64\UnrealEditor\Development\FinalYB_DebugPlugin\Module.FinalYB_DebugPlugin.cpp.obj"
-"C:\Users\YB\Desktop\Unreal_Porfolio_Git\Plugins\FinalYB_DebugPlugin\FinalYB_DebugPlugin\Intermediate\Build\Win64\x64\UnrealEditor\Development\FinalYB_DebugPlugin\Default.rc2.res"
-/OUT:"C:\Users\YB\Desktop\Unreal_Porfolio_Git\Plugins\FinalYB_DebugPlugin\FinalYB_DebugPlugin\Intermediate\Build\Win64\x64\UnrealEditor\Development\FinalYB_DebugPlugin\UnrealEditor-FinalYB_DebugPlugin.lib"
+"C:\Users\user\Desktop\Unreal_Porfolio_Git\Intermediate\Build\Win64\x64\Unreal_pt_KYBEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h.obj"
+"C:\Users\user\Desktop\Unreal_Porfolio_Git\Plugins\FinalYB_DebugPlugin\FinalYB_DebugPlugin\Intermediate\Build\Win64\x64\UnrealEditor\Development\FinalYB_DebugPlugin\Module.FinalYB_DebugPlugin.cpp.obj"
+"C:\Users\user\Desktop\Unreal_Porfolio_Git\Plugins\FinalYB_DebugPlugin\FinalYB_DebugPlugin\Intermediate\Build\Win64\x64\UnrealEditor\Development\FinalYB_DebugPlugin\Default.rc2.res"
+/OUT:"C:\Users\user\Desktop\Unreal_Porfolio_Git\Plugins\FinalYB_DebugPlugin\FinalYB_DebugPlugin\Intermediate\Build\Win64\x64\UnrealEditor\Development\FinalYB_DebugPlugin\UnrealEditor-FinalYB_DebugPlugin.lib"
