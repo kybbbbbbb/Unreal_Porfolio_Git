@@ -21,6 +21,7 @@ UCSoundManager* UCSoundManager::GetInstance()
 		Instance->AddToRoot();
 		Instance->LoadSounds();
 	}
+
 	return Instance;
 }
 
@@ -28,13 +29,14 @@ void UCSoundManager::PlaySound2D(const FName& SoundName, UWorld* InWorld)
 {
 	if (USoundCue* Sound = SoundMap.FindRef(SoundName))
 	{
+		
 		// 사운드의 카테고리와 볼륨 찾기
 		FSoundData* SoundData = SoundDataTable->FindRow<FSoundData>(SoundName, TEXT(""));
+		
 		if (SoundData)
 		{
 			// 카테고리에 해당하는 볼륨 가져오기
 			float Volume = CategoryMap.FindRef(SoundData->Category);
-
 			// 사운드 재생
 			UGameplayStatics::PlaySound2D(InWorld, Sound, Volume);
 		}
@@ -52,9 +54,9 @@ void UCSoundManager::PlaySound3D(const FName& SoundName, const FVector& Location
 	{
 		FSoundData* SoundData = SoundDataTable->FindRow<FSoundData>(SoundName, TEXT(""));
 		if (SoundData)
-		{
+		{	
 			float FinalVolume = CategoryMap[SoundData->Category];
-
+		
 			// 감쇠 설정
 			USoundAttenuation* Attenuation = NewObject<USoundAttenuation>();
 			Attenuation->Attenuation.DistanceAlgorithm = EAttenuationDistanceModel::Linear;  
@@ -90,7 +92,7 @@ void UCSoundManager::PlayBGM(const FName& SoundName, UWorld* InWorld)
 	{
 		FSoundData* SoundData = SoundDataTable->FindRow<FSoundData>(SoundName, TEXT(""));
 		float Volume = 1.0f; // 기본 볼륨
-
+		
 		if (SoundData)
 		{
 			Volume = CategoryMap.FindRef(SoundData->Category);

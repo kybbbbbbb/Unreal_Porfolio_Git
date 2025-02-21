@@ -57,7 +57,6 @@ ACPlayer::ACPlayer()
 	SpringArm->bUsePawnControlRotation = true;
 	SpringArm->bEnableCameraLag = true;
 
-
 	GetMesh()->SetAnimInstanceClass(ConstructorHelpers::FClassFinder<UCAnimInstance>(L"/Script/Engine.AnimBlueprint'/Game/Characters/01_Player/Animation/Sword/ABP_CAniminstance1.ABP_CAniminstance1_C'").Class);
 
 
@@ -74,6 +73,7 @@ void ACPlayer::Tick(float DeltaTime)
 	if (UIManager != nullptr)
 	{
 		UIManager->Tick(DeltaTime);
+
 	}
 
 	if (bOnDash == true)
@@ -262,7 +262,6 @@ void ACPlayer::Damage()
 			PlayAnimMontage(montage, 1.0f, "start");
 			SoundManager->PlaySound2D("SC_Player_Hit", GetWorld());
 
-			
 
 			SetActorRotation(UKismetMathLibrary::FindLookAtRotation(start, target));
 		}
@@ -359,7 +358,6 @@ void ACPlayer::SetWeaponOnVisible()
 void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &ACPlayer::OnMoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &ACPlayer::OnMoveRight);
